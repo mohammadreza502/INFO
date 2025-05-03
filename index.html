@@ -13,7 +13,9 @@
 		}
 
 		body {
-			background-color: #28223F;
+			background: linear-gradient(-45deg, #28223F, #3B2F5B, #1F1A36, #2E295E);
+			background-size: 400% 400%;
+			animation: gradientBG 15s ease infinite;
 			font-family: Montserrat, sans-serif;
 			display: flex;
 			align-items: center;
@@ -21,6 +23,18 @@
 			flex-direction: column;
 			min-height: 100vh;
 			margin: 0;
+		}
+
+		@keyframes gradientBG {
+			0% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+			100% {
+				background-position: 0% 50%;
+			}
 		}
 
 		h3 {
@@ -58,7 +72,7 @@
 			padding: 3px 7px;
 			position: absolute;
 			top: 30px;
-			left: 13px; /* حرکت بیشتر به سمت چپ */
+			left: 13px;
 		}
 
 		.card-container .round {
