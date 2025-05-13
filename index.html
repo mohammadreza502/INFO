@@ -150,6 +150,14 @@
 			color: #3c97bf;
 			text-decoration: none;
 		}
+
+		/* استایل برای تصویر پرچم */
+		.flag {
+			width: 16px;            /* اندازه دلخواه */
+			height: auto;
+			vertical-align: middle; /* وسط‌چین کردن با خط متن */
+			margin: 0 4px;          /* فاصله از متن */
+		}
 	</style>
 </head>
 <body>
@@ -158,7 +166,16 @@
 	<span class="info-label">Information</span>
 	<img class="round" src="https://i.postimg.cc/vmQz3Dpj/photo-2025-05-02-02-56-39.jpg" alt="user" />
 	<h3>Mohammadreza Hedayati</h3>
-	<h6>Tehran,Iran</h6>
+	<h6>
+		📍 Tehran,
+		<img
+			class="flag"
+			src="https://flagcdn.com/w20/ir.png"
+			srcset="https://flagcdn.com/w40/ir.png 2x"
+			alt="🇮🇷"
+		>
+		Iran
+	</h6>
 	<p>ICT and <br/> Computer Networks</p>
 
 	<div class="social-icons">
