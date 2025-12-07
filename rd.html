@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رادیو گوشه - گنجینه کتاب‌های صوتی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #971e47;
+            --primary-light: #c12e5d;
+            --primary-dark: #7a1939;
+            --secondary-color: #f8e9ef;
+            --accent-color: #ff9e4a;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --shadow: rgba(151, 30, 71, 0.2);
+            --gradient: linear-gradient(135deg, #971e47 0%, #c12e5d 50%, #ff9e4a 100%);
+        }
+        
+        body {
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: #fef9fb;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles with Particles */
+        header {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 2s infinite alternate;
+            transition: all 0.5s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+            100% {
+                box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        .logo i {
+            font-size: 70px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #fff, #ffd9e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-content p {
+            font-size: 1.3rem;
+            line-height: 1.9;
+            opacity: 0.95;
+            margin-bottom: 40px;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            right: 50%;
+            transform: translateX(50%);
+            z-index: 2;
+            color: var(--white);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(50%);
+            }
+        }
+        
+        /* Introduction Section */
+        .intro-section {
+            padding: 100px 0;
+            position: relative;
+            background-color: var(--white);
+        }
+        
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--primary-color), transparent);
+            opacity: 0.1;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            position: relative;
+            padding-bottom: 25px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            width: 150px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 3px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .intro-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-top: 60px;
+        }
+        
+        .intro-text {
+            flex: 1;
+            min-width: 300px;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(151, 30, 71, 0.1);
+            border: 1px solid rgba(151, 30, 71, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .intro-text:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(151, 30, 71, 0.15);
+        }
+        
+        .intro-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 8px;
+            height: 100%;
+            background: var(--gradient);
+        }
+        
+        .intro-text p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .intro-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        
+        .intro-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+        
+        .intro-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Books Section */
+        .books-section {
+            padding: 100px 0;
+            background-color: #f9f2f6;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .books-section::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .books-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .books-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .books-header h2 {
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .books-header p {
+            color: var(--light-text);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Book Carousel */
+        .book-carousel {
+            position: relative;
+            margin: 60px auto;
+            max-width: 1200px;
+            overflow: hidden;
+            padding: 30px 0;
+            z-index: 1;
+        }
+        
+        .carousel-container {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+            gap: 30px;
+            padding: 30px 15px;
+        }
+        
+        .book-item {
+            min-width: 350px;
+            background-color: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(151, 30, 71, 0.15);
+            transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+            border: 1px solid rgba(151, 30, 71, 0.1);
+            flex-shrink: 0;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .book-item:hover {
+            transform: translateY(-20px) rotateX(5deg);
+            box-shadow: 0 40px 70px rgba(151, 30, 71, 0.25);
+        }
+        
+        .book-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            z-index: 2;
+        }
+        
+        .book-cover {
+            height: 380px;
+            background: linear-gradient(135deg, var(--secondary-color), #fff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            animation: shine 3s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .book-cover i {
+            font-size: 90px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 5px 15px rgba(151, 30, 71, 0.3));
+        }
+        
+        .book-info {
+            padding: 30px;
+            position: relative;
+        }
+        
+        .book-info h3 {
+            color: var(--primary-color);
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            height: 80px;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        .book-info p {
+            color: var(--light-text);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            height: 90px;
+            overflow: hidden;
+            line-height: 1.7;
+        }
+        
+        .book-link {
+            display: inline-block;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(151, 30, 71, 0.3);
+        }
+        
+        .book-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .book-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(151, 30, 71, 0.4);
+        }
+        
+        .book-link:hover::before {
+            animation: shimmer 1s;
+        }
+        
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Carousel Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .carousel-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(151, 30, 71, 0.3);
+        }
+        
+        .carousel-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(151, 30, 71, 0.4);
+        }
+        
+        .carousel-dots {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transform: scale(0);
+            border-radius: 50%;
+            transition: transform 0.4s ease;
+        }
+        
+        .dot.active::before {
+            transform: scale(1);
+        }
+        
+        .dot.active {
+            transform: scale(1.2);
+            box-shadow: 0 5px 10px rgba(151, 30, 71, 0.3);
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            right: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: var(--gradient);
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: float-element 20s infinite linear;
+        }
+        
+        @keyframes float-element {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) translateX(30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(30px) translateX(-30px) rotate(240deg);
+            }
+            100% {
+                transform: translateY(0) translateX(0) rotate(360deg);
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), #5a112a);
+            color: var(--white);
+            padding: 70px 0 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .footer-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .book-item {
+                min-width: 320px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .intro-content {
+                flex-direction: column;
+            }
+            
+            .book-item {
+                min-width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .header-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .book-item {
+                min-width: 280px;
+            }
+            
+            .carousel-controls {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .logo i {
+                font-size: 60px;
+            }
+            
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .book-item {
+                min-width: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section with Particles -->
+    <header>
+        <div class="particles" id="particles"></div>
+        <div class="header-overlay"></div>
+        
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-podcast"></i>
+                </div>
+                <div class="header-content">
+                    <h1 class="animate__animated animate__fadeInDown">رادیو گوشه</h1>
+                    <p class="animate__animated animate__fadeIn animate__delay-1s">جایی برای شنیدن زیبایی‌ها. رادیو گوشه پلتفرمی برای شنیدن بهترین پادکست‌ها و کتاب‌های صوتی فارسی در موضوعات مختلف است. ما با تولید و انتشار محتوای صوتی باکیفیت، تجربه‌ای متفاوت از شنیدن را برای شما فراهم می‌کنیم. در اینجا داستان‌ها زنده می‌شوند و کلمات جان می‌گیرند.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Introduction Section -->
+        <section class="intro-section">
+            <h2 class="section-title animate__animated animate__fadeIn">درباره رادیو گوشه</h2>
+            
+            <div class="intro-content">
+                <div class="intro-text animate__animated animate__fadeInRight">
+                    <p>رادیو گوشه در سال ۱۳۹۸ با هدف تولید و انتشار محتوای صوتی باکیفیت در حوزه‌های مختلف از جمله ادبیات، تاریخ، فلسفه، روانشناسی و علوم اجتماعی تأسیس شد.</p>
+                    <p>ما معتقدیم که صدا می‌تواند عمیق‌ترین ارتباط را با مخاطب برقرار کند و تجربه‌ای منحصربه‌فرد از یادگیری و لذت بردن از محتوا ایجاد نماید. هر داستان، هر گفتگو و هر نغمه‌ای که از رادیو گوشه پخش می‌شود، با عشق و دقت فراوان انتخاب و تولید شده است.</p>
+                    <p>تیم رادیو گوشه متشکل از نویسندگان، گویندگان و تهیه‌کنندگان با تجربه است که با عشق به صدا و قصه‌گویی، هر روز بر کیفیت محتوای تولیدی می‌افزایند. ما به هنر قصه‌گویی اعتقاد داریم و معتقدیم هر صدا داستانی برای گفتن دارد.</p>
+                </div>
+                <div class="intro-image animate__animated animate__fadeInLeft">
+                    <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="استودیو رادیو گوشه">
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section class="books-section">
+            <div class="floating-elements" id="floatingElements"></div>
+            
+            <div class="books-header">
+                <h2 class="animate__animated animate__fadeInDown">گنجینه کتاب‌های صوتی</h2>
+                <p class="animate__animated animate__fadeIn animate__delay-1s">در این بخش می‌توانید کتاب‌های منتشر شده توسط رادیو گوشه را مشاهده کنید. هر کتاب یک دنیای جدید برای کشف است. برای مشاهده جزئیات هر کتاب و دسترسی به محتوای کامل، روی دکمه "مشاهده کتاب" کلیک کنید.</p>
+            </div>
+
+            <!-- Book Carousel -->
+            <div class="book-carousel">
+                <div class="carousel-container" id="carouselContainer">
+                    <!-- Book items will be added here by JavaScript -->
+                </div>
+                
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prevBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    
+                    <div class="carousel-dots" id="carouselDots">
+                        <!-- Dots will be added by JavaScript -->
+                    </div>
+                    
+                    <button class="carousel-btn" id="nextBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-overlay"></div>
+        
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-podcast"></i>
+                </div>
+                <p>رادیو گوشه - جایی برای شنیدن بهترین داستان‌ها و گفتگوها</p>
+                
+                <div class="footer-links">
+                    <a href="#">صفحه اصلی</a>
+                    <a href="#">پادکست‌ها</a>
+                    <a href="#">کتاب‌های صوتی</a>
+                    <a href="#">درباره ما</a>
+                    <a href="#">تماس با ما</a>
+                </div>
+                
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-spotify"></i></a>
+                    <a href="#"><i class="fab fa-soundcloud"></i></a>
+                </div>
+                
+                <div class="copyright">
+                    <p>© کلیه حقوق این وب‌سایت متعلق به رادیو گوشه می‌باشد. ۱۴۰۲</p>
+                    <p>طراحی و توسعه با ❤️ برای دوستداران صوت و داستان</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // کتاب‌های نمونه
+        const books = [
+            {
+                id: 1,
+                title: "قصه‌های شبانه رادیو گوشه",
+                description: "مجموعه‌ای از داستان‌های کوتاه و جذاب برای شب‌های آرام. این کتاب شامل ۳۰ داستان کوتاه از نویسندگان معاصر ایران است که با صدای گویندگان حرفه‌ای روایت شده‌اند.",
+                link: "#",
+                icon: "fas fa-moon"
+            },
+            {
+                id: 2,
+                title: "تاریخ شفاهی ایران",
+                description: "گفتگو با پیشکسوتان و مشاهیر ایرانی در مورد خاطرات و تجربیات آنها از رویدادهای مهم تاریخ معاصر ایران. مجموع‌ای بی‌نظیر از خاطرات ناب.",
+                link: "#",
+                icon: "fas fa-history"
+            },
+            {
+                id: 3,
+                title: "فلسفه برای زندگی",
+                description: "مباحث فلسفی به زبان ساده و کاربردی برای بهبود کیفیت زندگی. این کتاب شامل مفاهیم اصلی فلسفه غرب و شرق است که به شیوه‌ای جذاب روایت شده.",
+                link: "#",
+                icon: "fas fa-brain"
+            },
+            {
+                id: 4,
+                title: "رمان صوتی بیگانه",
+                description: "اقتباس صوتی از رمان مشهور آلبر کامو با گویندگی حرفه‌ای و موسیقی متن اختصاصی. تجربه‌ای سینمایی از شنیدن یک رمان فلسفی.",
+                link: "#",
+                icon: "fas fa-book-open"
+            },
+            {
+                id: 5,
+                title: "روانشناسی روابط",
+                description: "راهنمای عملی برای بهبود روابط بین فردی بر اساس آخرین یافته‌های علم روانشناسی. برای همه کسانی که می‌خواهند روابط بهتری داشته باشند.",
+                link: "#",
+                icon: "fas fa-heart"
+            },
+            {
+                id: 6,
+                title: "علم و اسرار کیهان",
+                description: "سفری شگفت‌انگیز به جهان نجوم و فیزیک کیهانی با زبان ساده و قابل فهم برای همه. از سیاهچاله‌ها تا جهان‌های موازی.",
+                link: "#",
+                icon: "fas fa-star"
+            },
+            {
+                id: 7,
+                title: "شعرهای عاشقانه فارسی",
+                description: "گزیده‌ای از زیباترین شعرهای عاشقانه ادبیات فارسی از حافظ و سعدی تا معاصران، با صدای گرم گویندگان رادیو گوشه.",
+                link: "#",
+                icon: "fas fa-heartbeat"
+            },
+            {
+                id: 8,
+                title: "رازهای موفقیت",
+                description: "مروری بر زندگی و اندیشه‌های افراد موفق جهان. این کتاب صوتی راهکارهای عملی برای رسیدن به موفقیت ارائه می‌دهد.",
+                link: "#",
+                icon: "fas fa-trophy"
+            }
+        ];
+
+        // عناصر DOM
+        const carouselContainer = document.getElementById('carouselContainer');
+        const carouselDots = document.getElementById('carouselDots');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const particlesContainer = document.getElementById('particles');
+        const floatingElementsContainer = document.getElementById('floatingElements');
+
+        // تنظیمات کاروسل
+        let currentIndex = 0;
+        let itemsPerView = 3;
+        let totalItems = books.length;
+
+        // ایجاد ذرات متحرک در هدر
+        function createParticles() {
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // اندازه تصادفی
+                const size = Math.random() * 20 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // موقعیت تصادفی
+                particle.style.right = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // تاخیر انیمیشن
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                
+                // شفافیت تصادفی
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ایجاد المان‌های شناور
+        function createFloatingElements() {
+            const elementCount = 15;
+            
+            for (let i = 0; i < elementCount; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                
+                // اندازه و موقعیت تصادفی
+                const size = Math.random() * 60 + 20;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.right = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                
+                // تاخیر انیمیشن
+                element.style.animationDelay = `${Math.random() * 20}s`;
+                
+                floatingElementsContainer.appendChild(element);
+            }
+        }
+
+        // تابع برای ایجاد کارت کتاب
+        function createBookItem(book) {
+            return `
+                <div class="book-item">
+                    <div class="book-cover">
+                        <i class="${book.icon}"></i>
+                    </div>
+                    <div class="book-info">
+                        <h3>${book.title}</h3>
+                        <p>${book.description}</p>
+                        <a href="${book.link}" class="book-link" target="_blank">
+                            <i class="fas fa-headphones"></i> گوش دادن
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // تابع برای به‌روزرسانی کاروسل
+        function updateCarousel() {
+            // محاسبه عرض هر آیتم بر اساس تعداد آیتم‌های در هر صفحه
+            const itemWidth = 100 / itemsPerView;
+            
+            // تنظیم عرض کاروسل و موقعیت
+            carouselContainer.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            
+            // به‌روزرسانی دات‌ها
+            updateDots();
+        }
+
+        // تابع برای ایجاد دات‌های کاروسل
+        function createDots() {
+            const dotsCount = Math.ceil(totalItems / itemsPerView);
+            
+            for (let i = 0; i < dotsCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateCarousel();
+                });
+                
+                carouselDots.appendChild(dot);
+            }
+        }
+
+        // تابع برای به‌روزرسانی وضعیت دات‌ها
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            const activeDotIndex = Math.floor(currentIndex);
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeDotIndex);
+            });
+        }
+
+        // تابع برای مقداردهی اولیه کاروسل
+        function initCarousel() {
+            // ایجاد آیتم‌های کتاب
+            books.forEach(book => {
+                const bookElement = document.createElement('div');
+                bookElement.innerHTML = createBookItem(book);
+                carouselContainer.appendChild(bookElement.firstElementChild);
+            });
+            
+            // ایجاد دات‌ها
+            createDots();
+            
+            // تنظیم رویدادهای دکمه‌ها
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                }
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                const maxIndex = Math.ceil(totalItems / itemsPerView) - 1;
+                if (currentIndex < maxIndex) {
+                    currentIndex++;
+                    updateCarousel();
+                }
+            });
+            
+            // تنظیم ریسپانسیو کاروسل
+            function handleResize() {
+                // در موبایل فقط یک کتاب نمایش داده می‌شود
+                if (window.innerWidth <= 768) {
+                    itemsPerView = 1;
+                } else if (window.innerWidth <= 1024) {
+                    itemsPerView = 2;
+                } else {
+                    itemsPerView = 3;
+                }
+                
+                updateCarousel();
+            }
+            
+            window.addEventListener('resize', handleResize);
+            handleResize(); // فراخوانی اولیه
+        }
+
+        // اسکرول نرم به بخش‌های مختلف
+        function initSmoothScroll() {
+            const scrollDown = document.querySelector('.scroll-down');
+            const introSection = document.querySelector('.intro-section');
+            
+            scrollDown.addEventListener('click', () => {
+                introSection.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // انیمیشن اسکرول
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                    }
+                });
+            }, observerOptions);
+            
+            // مشاهده آیتم‌های کتاب
+            document.querySelectorAll('.book-item').forEach(item => {
+                observer.observe(item);
+            });
+        }
+
+        // راه‌اندازی پس از لود صفحه
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            createFloatingElements();
+            initCarousel();
+            initSmoothScroll();
+            
+            // انیمیشن‌های ورود
+            setTimeout(() => {
+                document.querySelector('.header-content h1').classList.add('animate__fadeInDown');
+                document.querySelector('.header-content p').classList.add('animate__fadeIn');
+            }, 300);
+        });
+    </script>
+</body>
+</html>
