@@ -3,1159 +3,1368 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رادیو گوشه - گنجینه کتاب‌های صوتی</title>
+    <title>طلا فروشی باران | نمایش لحظه‌ای قیمت طلا و ارز</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
-            --primary-color: #971e47;
-            --primary-light: #c12e5d;
-            --primary-dark: #7a1939;
-            --secondary-color: #f8e9ef;
-            --accent-color: #ff9e4a;
-            --text-color: #333;
-            --light-text: #666;
-            --white: #fff;
-            --shadow: rgba(151, 30, 71, 0.2);
-            --gradient: linear-gradient(135deg, #971e47 0%, #c12e5d 50%, #ff9e4a 100%);
+            --primary-dark: #0a192f;
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-gold: #d4af37;
+            --light-gold: #f5e8c8;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --card-bg: rgba(15, 23, 42, 0.7);
         }
         
         body {
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            color: var(--text-color);
-            background-color: #fef9fb;
+            background-color: var(--primary-dark);
+            color: var(--white);
             direction: rtl;
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
         .container {
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        /* Header Styles with Particles */
+        /* Header and Navigation */
         header {
-            background: var(--gradient);
-            color: var(--white);
-            padding: 40px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .header-overlay {
-            position: absolute;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
             top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-        
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            z-index: 0;
-        }
-        
-        .particle {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        .logo-container {
-            position: relative;
-            z-index: 2;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            width: 180px;
-            height: 180px;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            animation: pulse 2s infinite alternate;
-            transition: all 0.5s ease;
-        }
-        
-        .logo:hover {
-            transform: scale(1.05) rotate(5deg);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            }
-            100% {
-                box-shadow: 0 20px 60px rgba(255, 255, 255, 0.2);
-            }
-        }
-        
-        .logo i {
-            font-size: 70px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            z-index: 1000;
         }
         
         .header-content {
-            position: relative;
-            z-index: 2;
-            max-width: 900px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        .header-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, #fff, #ffd9e8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .header-content p {
-            font-size: 1.3rem;
-            line-height: 1.9;
-            opacity: 0.95;
-            margin-bottom: 40px;
-        }
-        
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            right: 50%;
-            transform: translateX(50%);
-            z-index: 2;
-            color: var(--white);
-            font-size: 2rem;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(50%);
-            }
-        }
-        
-        /* Introduction Section */
-        .intro-section {
-            padding: 100px 0;
-            position: relative;
-            background-color: var(--white);
-        }
-        
-        .intro-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, var(--primary-color), transparent);
-            opacity: 0.1;
-        }
-        
-        .section-title {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 2.8rem;
-            margin-bottom: 60px;
-            position: relative;
-            padding-bottom: 25px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 150px;
-            height: 5px;
-            background: var(--gradient);
-            border-radius: 3px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-        
-        .intro-content {
+        .logo {
             display: flex;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 60px;
-            margin-top: 60px;
-        }
-        
-        .intro-text {
-            flex: 1;
-            min-width: 300px;
-            padding: 40px;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(151, 30, 71, 0.1);
-            border: 1px solid rgba(151, 30, 71, 0.1);
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        
-        .intro-text:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(151, 30, 71, 0.15);
-        }
-        
-        .intro-text::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 8px;
-            height: 100%;
-            background: var(--gradient);
-        }
-        
-        .intro-text p {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            color: var(--text-color);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .intro-image {
-            flex: 1;
-            min-width: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            transform: perspective(1000px) rotateY(-5deg);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-        
-        .intro-image:hover {
-            transform: perspective(1000px) rotateY(0deg);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-        }
-        
-        .intro-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.8s ease;
-        }
-        
-        .intro-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Books Section */
-        .books-section {
-            padding: 100px 0;
-            background-color: #f9f2f6;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .books-section::before {
-            content: '';
-            position: absolute;
-            top: -150px;
-            right: -150px;
-            width: 300px;
-            height: 300px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            opacity: 0.05;
-            z-index: 0;
-        }
-        
-        .books-section::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 200px;
-            height: 200px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            opacity: 0.05;
-            z-index: 0;
-        }
-        
-        .books-header {
-            text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .books-header h2 {
-            color: var(--primary-color);
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-        }
-        
-        .books-header p {
-            color: var(--light-text);
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* Book Carousel */
-        .book-carousel {
-            position: relative;
-            margin: 60px auto;
-            max-width: 1200px;
-            overflow: hidden;
-            padding: 30px 0;
-            z-index: 1;
-        }
-        
-        .carousel-container {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-            gap: 30px;
-            padding: 30px 15px;
-        }
-        
-        .book-item {
-            min-width: 350px;
-            background-color: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(151, 30, 71, 0.15);
-            transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-            border: 1px solid rgba(151, 30, 71, 0.1);
-            flex-shrink: 0;
-            position: relative;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        
-        .book-item:hover {
-            transform: translateY(-20px) rotateX(5deg);
-            box-shadow: 0 40px 70px rgba(151, 30, 71, 0.25);
-        }
-        
-        .book-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-            z-index: 2;
-        }
-        
-        .book-cover {
-            height: 380px;
-            background: linear-gradient(135deg, var(--secondary-color), #fff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .book-cover::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
-            animation: shine 3s infinite linear;
-        }
-        
-        @keyframes shine {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-        
-        .book-cover i {
-            font-size: 90px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 5px 15px rgba(151, 30, 71, 0.3));
-        }
-        
-        .book-info {
-            padding: 30px;
-            position: relative;
-        }
-        
-        .book-info h3 {
-            color: var(--primary-color);
-            font-size: 1.7rem;
-            margin-bottom: 15px;
-            height: 80px;
-            overflow: hidden;
-            line-height: 1.4;
-        }
-        
-        .book-info p {
-            color: var(--light-text);
-            font-size: 1rem;
-            margin-bottom: 25px;
-            height: 90px;
-            overflow: hidden;
-            line-height: 1.7;
-        }
-        
-        .book-link {
-            display: inline-block;
-            background: var(--gradient);
-            color: var(--white);
-            padding: 15px 35px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(151, 30, 71, 0.3);
-        }
-        
-        .book-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: translateX(-100%);
-        }
-        
-        .book-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(151, 30, 71, 0.4);
-        }
-        
-        .book-link:hover::before {
-            animation: shimmer 1s;
-        }
-        
-        @keyframes shimmer {
-            100% {
-                transform: translateX(100%);
-            }
-        }
-        
-        /* Carousel Controls */
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .carousel-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient);
-            color: var(--white);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(151, 30, 71, 0.3);
-        }
-        
-        .carousel-btn:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 15px 30px rgba(151, 30, 71, 0.4);
-        }
-        
-        .carousel-dots {
-            display: flex;
             gap: 15px;
         }
         
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background-color: #ddd;
-            cursor: pointer;
-            transition: all 0.4s ease;
+        .logo-icon {
+            color: var(--accent-gold);
+            font-size: 2.8rem;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(to right, var(--accent-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--light-gold);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-gold);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.95)), url('https://images.unsplash.com/photo-1581985673473-0784a7a44e39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
             position: relative;
             overflow: hidden;
         }
         
-        .dot::before {
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
             right: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient);
-            transform: scale(0);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 70%);
             border-radius: 50%;
-            transition: transform 0.4s ease;
         }
         
-        .dot.active::before {
-            transform: scale(1);
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
-        .dot.active {
-            transform: scale(1.2);
-            box-shadow: 0 5px 10px rgba(151, 30, 71, 0.3);
+        .hero h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--white), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
-        /* Floating Elements */
-        .floating-elements {
-            position: absolute;
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            color: #cbd5e1;
+        }
+        
+        .gold-price-card {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8) 0%, rgba(59, 130, 246, 0.6) 100%);
+            border-radius: 20px;
+            padding: 30px;
             width: 100%;
-            height: 100%;
-            top: 0;
-            right: 0;
-            pointer-events: none;
+            max-width: 1000px;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gold-price-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 70%);
             z-index: 0;
         }
         
-        .floating-element {
-            position: absolute;
-            background: var(--gradient);
-            opacity: 0.1;
-            border-radius: 50%;
-            animation: float-element 20s infinite linear;
+        .price-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
         }
         
-        @keyframes float-element {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-            }
-            33% {
-                transform: translateY(-30px) translateX(30px) rotate(120deg);
-            }
-            66% {
-                transform: translateY(30px) translateX(-30px) rotate(240deg);
-            }
-            100% {
-                transform: translateY(0) translateX(0) rotate(360deg);
-            }
+        .price-card-header h3 {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-card-header h3 i {
+            font-size: 1.6rem;
+        }
+        
+        .update-time {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .price-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price-item {
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .price-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        
+        .price-title {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .price-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .price-change {
+            font-size: 1rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .price-change.positive {
+            color: var(--success);
+        }
+        
+        .price-change.negative {
+            color: var(--danger);
+        }
+        
+        .price-change.neutral {
+            color: var(--warning);
+        }
+        
+        /* Currency Section */
+        .currency-section, .gold-section, .coin-section {
+            padding: 60px 0;
+            background-color: rgba(15, 23, 42, 0.5);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 3px;
+            bottom: -10px;
+            right: 15%;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+        
+        .section-header p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .price-table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .price-table th {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8) 0%, rgba(59, 130, 246, 0.6) 100%);
+            color: var(--accent-gold);
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .price-table td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .price-table tr:hover {
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+        
+        .currency-name {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: right;
+            padding-right: 20px;
+        }
+        
+        .currency-flag {
+            width: 40px;
+            height: 28px;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .buy-price, .sell-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .chart-btn {
+            background-color: rgba(30, 58, 138, 0.3);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+        
+        .chart-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        /* Chart Section */
+        .chart-section {
+            padding: 60px 0;
+            background-color: rgba(15, 23, 42, 0.7);
+        }
+        
+        .chart-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 30px;
+        }
+        
+        .chart-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .date-inputs {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .date-input {
+            background-color: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--white);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .show-chart-btn {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+            color: var(--primary-dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .show-chart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+        
+        /* Note Section */
+        .note-section {
+            padding: 40px 0;
+            background-color: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .note-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .note-box h3 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .note-box p {
+            color: #cbd5e1;
+            line-height: 1.8;
         }
         
         /* Footer */
         footer {
-            background: linear-gradient(135deg, var(--primary-dark), #5a112a);
-            color: var(--white);
-            padding: 70px 0 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer-overlay {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-            background-size: cover;
-            opacity: 0.3;
+            background-color: #0f172a;
+            padding: 50px 0 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
         
         .footer-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
-        .footer-logo {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            display: inline-block;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-gold);
         }
         
         .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
-            margin: 40px 0;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
         }
         
         .footer-links a {
-            color: var(--white);
+            color: #cbd5e1;
             text-decoration: none;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-color);
-            transition: width 0.3s ease;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .footer-links a:hover {
-            color: var(--accent-color);
+            color: var(--accent-gold);
         }
         
-        .footer-links a:hover::after {
-            width: 100%;
+        .contact-info {
+            color: #cbd5e1;
+        }
+        
+        .contact-info p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .social-icons {
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 40px 0;
+            gap: 15px;
+            margin-top: 20px;
         }
         
         .social-icons a {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            color: var(--white);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
+            background-color: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            transition: all 0.3s;
         }
         
         .social-icons a:hover {
-            background: var(--accent-color);
-            transform: translateY(-5px);
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
         }
         
         .copyright {
-            margin-top: 50px;
-            padding-top: 30px;
+            text-align: center;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.95rem;
-            opacity: 0.8;
+            color: #94a3b8;
+            font-size: 0.9rem;
         }
         
-        /* Responsive Design */
-        @media (max-width: 1100px) {
-            .book-item {
-                min-width: 320px;
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
             }
         }
         
         @media (max-width: 992px) {
-            .header-content h1 {
-                font-size: 2.8rem;
-            }
-            
-            .intro-content {
+            .header-content {
                 flex-direction: column;
+                gap: 20px;
             }
             
-            .book-item {
-                min-width: 300px;
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .price-table {
+                font-size: 0.9rem;
             }
         }
         
         @media (max-width: 768px) {
-            .header-content h1 {
-                font-size: 2.3rem;
+            .hero {
+                padding: 60px 0;
             }
             
-            .header-content p {
-                font-size: 1.1rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .book-item {
-                min-width: 280px;
-            }
-            
-            .carousel-controls {
-                flex-wrap: wrap;
-                gap: 20px;
-            }
-            
-            .footer-links {
+            .price-display {
                 flex-direction: column;
-                gap: 20px;
+            }
+            
+            .price-item {
+                width: 100%;
+            }
+            
+            .currency-section, .gold-section, .coin-section {
+                padding: 40px 0;
+            }
+            
+            .price-table th, .price-table td {
+                padding: 12px 8px;
+            }
+            
+            .chart-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date-inputs {
+                width: 100%;
+                flex-wrap: wrap;
             }
         }
         
         @media (max-width: 576px) {
-            .logo {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .logo i {
-                font-size: 60px;
-            }
-            
-            .header-content h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title {
+            .logo-text h1 {
                 font-size: 1.8rem;
             }
             
-            .book-item {
-                min-width: 260px;
+            .hero h2 {
+                font-size: 2rem;
             }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .gold-price-card {
+                padding: 20px;
+            }
+            
+            .price-card-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .price-table {
+                font-size: 0.8rem;
+            }
+            
+            .buy-price, .sell-price {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Animation for prices */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #b8941f 0%, var(--accent-gold) 100%);
         }
     </style>
 </head>
 <body>
-    <!-- Header Section with Particles -->
+    <!-- Header -->
     <header>
-        <div class="particles" id="particles"></div>
-        <div class="header-overlay"></div>
-        
         <div class="container">
-            <div class="logo-container">
+            <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-podcast"></i>
+                    <div class="logo-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>طلا فروشی باران</h1>
+                        <span>نمایش لحظه‌ای قیمت طلا، سکه و ارز</span>
+                    </div>
                 </div>
-                <div class="header-content">
-                    <h1 class="animate__animated animate__fadeInDown">رادیو گوشه</h1>
-                    <p class="animate__animated animate__fadeIn animate__delay-1s">جایی برای شنیدن زیبایی‌ها. رادیو گوشه پلتفرمی برای شنیدن بهترین پادکست‌ها و کتاب‌های صوتی فارسی در موضوعات مختلف است. ما با تولید و انتشار محتوای صوتی باکیفیت، تجربه‌ای متفاوت از شنیدن را برای شما فراهم می‌کنیم. در اینجا داستان‌ها زنده می‌شوند و کلمات جان می‌گیرند.</p>
-                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> صفحه اصلی</a></li>
+                        <li><a href="#currency"><i class="fas fa-dollar-sign"></i> نرخ ارز</a></li>
+                        <li><a href="#coins"><i class="fas fa-coins"></i> سکه بانکی</a></li>
+                        <li><a href="#gold"><i class="fas fa-gem"></i> شمش طلا</a></li>
+                        <li><a href="#chart"><i class="fas fa-chart-line"></i> نمودارها</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-        
-        <div class="scroll-down">
-            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Introduction Section -->
-        <section class="intro-section">
-            <h2 class="section-title animate__animated animate__fadeIn">درباره رادیو گوشه</h2>
-            
-            <div class="intro-content">
-                <div class="intro-text animate__animated animate__fadeInRight">
-                    <p>رادیو گوشه در سال ۱۳۹۸ با هدف تولید و انتشار محتوای صوتی باکیفیت در حوزه‌های مختلف از جمله ادبیات، تاریخ، فلسفه، روانشناسی و علوم اجتماعی تأسیس شد.</p>
-                    <p>ما معتقدیم که صدا می‌تواند عمیق‌ترین ارتباط را با مخاطب برقرار کند و تجربه‌ای منحصربه‌فرد از یادگیری و لذت بردن از محتوا ایجاد نماید. هر داستان، هر گفتگو و هر نغمه‌ای که از رادیو گوشه پخش می‌شود، با عشق و دقت فراوان انتخاب و تولید شده است.</p>
-                    <p>تیم رادیو گوشه متشکل از نویسندگان، گویندگان و تهیه‌کنندگان با تجربه است که با عشق به صدا و قصه‌گویی، هر روز بر کیفیت محتوای تولیدی می‌افزایند. ما به هنر قصه‌گویی اعتقاد داریم و معتقدیم هر صدا داستانی برای گفتن دارد.</p>
-                </div>
-                <div class="intro-image animate__animated animate__fadeInLeft">
-                    <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="استودیو رادیو گوشه">
-                </div>
-            </div>
-        </section>
-
-        <!-- Books Section -->
-        <section class="books-section">
-            <div class="floating-elements" id="floatingElements"></div>
-            
-            <div class="books-header">
-                <h2 class="animate__animated animate__fadeInDown">گنجینه کتاب‌های صوتی</h2>
-                <p class="animate__animated animate__fadeIn animate__delay-1s">در این بخش می‌توانید کتاب‌های منتشر شده توسط رادیو گوشه را مشاهده کنید. هر کتاب یک دنیای جدید برای کشف است. برای مشاهده جزئیات هر کتاب و دسترسی به محتوای کامل، روی دکمه "مشاهده کتاب" کلیک کنید.</p>
-            </div>
-
-            <!-- Book Carousel -->
-            <div class="book-carousel">
-                <div class="carousel-container" id="carouselContainer">
-                    <!-- Book items will be added here by JavaScript -->
-                </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>قیمت لحظه‌ای طلا، سکه و ارز</h2>
+                <p>در طلا فروشی باران، آخرین و به‌روزترین قیمت‌های طلا، سکه، شمش و ارزهای معتبر جهانی را به صورت لحظه‌ای مشاهده کنید.</p>
                 
-                <div class="carousel-controls">
-                    <button class="carousel-btn" id="prevBtn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    
-                    <div class="carousel-dots" id="carouselDots">
-                        <!-- Dots will be added by JavaScript -->
+                <div class="gold-price-card">
+                    <div class="price-card-header">
+                        <h3><i class="fas fa-chart-line"></i> قیمت طلا و ارز امروز - ۱۴۰۴/۱۰/۱۰</h3>
+                        <div class="update-time">آخرین بروزرسانی: <span id="update-time">امروز ۱۶:۰۱:۴۹</span></div>
                     </div>
                     
-                    <button class="carousel-btn" id="nextBtn">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
+                    <div class="price-display">
+                        <div class="price-item pulse">
+                            <div class="price-title">دلار آمریکا</div>
+                            <div class="price-value" id="usd-price">۱۲۵,۰۷۴</div>
+                            <div class="price-change positive"><i class="fas fa-arrow-up"></i> ۰.۸٪ (+۱,۲۰۰)</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                        
+                        <div class="price-item">
+                            <div class="price-title">یورو اروپا</div>
+                            <div class="price-value" id="eur-price">۱۴۷,۱۵۳</div>
+                            <div class="price-change positive"><i class="fas fa-arrow-up"></i> ۰.۷٪ (+۱,۰۵۰)</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                        
+                        <div class="price-item">
+                            <div class="price-title">سکه تمام بهار</div>
+                            <div class="price-value" id="coin-price">۱۳۹,۲۰۰,۰۰۰</div>
+                            <div class="price-change negative"><i class="fas fa-arrow-down"></i> ۰.۳٪ (-۴۰۰,۰۰۰)</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Currency Section -->
+    <section id="currency" class="currency-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-dollar-sign"></i> نرخ ارزهای جهانی</h2>
+                <p>آخرین نرخ خرید و فروش ارزهای معتبر جهانی - بروزرسانی: ۱۴۰۴/۱۰/۱۰ - ۱۵:۳۹:۲۸</p>
+            </div>
+            
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th width="25%">عنوان</th>
+                            <th width="15%">خرید</th>
+                            <th width="15%">فروش</th>
+                            <th width="15%">تغییرات</th>
+                            <th width="15%">نمودار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="currency-table">
+                        <!-- Currency data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coin Section -->
+    <section id="coins" class="coin-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-coins"></i> سکه‌های بانکی</h2>
+                <p>قیمت خرید و فروش سکه‌های بانکی - بروزرسانی: ۱۴۰۴/۱۰/۱۰ - ۱۶:۰۱:۴۹</p>
+            </div>
+            
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th width="30%">عنوان</th>
+                            <th width="20%">خرید</th>
+                            <th width="20%">فروش</th>
+                            <th width="15%">تغییرات</th>
+                            <th width="15%">نمودار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coin-table">
+                        <!-- Coin data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gold Section -->
+    <section id="gold" class="gold-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-gem"></i> شمش طلا و طلای آبشده</h2>
+                <p>قیمت خرید و فروش شمش طلا و طلای آبشده - بروزرسانی: ۱۴۰۴/۱۰/۱۰ - ۱۶:۰۱:۴۹</p>
+            </div>
+            
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th width="30%">عنوان</th>
+                            <th width="20%">خرید</th>
+                            <th width="20%">فروش</th>
+                            <th width="15%">تغییرات</th>
+                            <th width="15%">نمودار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gold-table">
+                        <!-- Gold data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Persian Coins Section -->
+    <section class="gold-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-coins"></i> سکه‌های پارسیان</h2>
+                <p>قیمت فروش سکه‌های پارسیان - بروزرسانی: ۱۴۰۴/۱۰/۱۰ - ۱۶:۰۱:۴۹</p>
+            </div>
+            
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th width="40%">عنوان</th>
+                            <th width="30%">فروش</th>
+                            <th width="15%">تغییرات</th>
+                            <th width="15%">نمودار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="persian-coin-table">
+                        <!-- Persian coin data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Note Section -->
+    <section class="note-section">
+        <div class="container">
+            <div class="note-box">
+                <h3><i class="fas fa-info-circle"></i> نکات مهم:</h3>
+                <p>شمش‌های طلا و طلاهای آبشده، صرفاً در سکه‌یاران قابل خرید و فروش می‌باشد. قیمت‌های نمایش داده شده بر اساس آخرین نرخ‌های اعلام شده از سوی بانک مرکزی و بازار داخلی می‌باشد و ممکن است با قیمت نهایی فروشگاه متفاوت باشد.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chart Section -->
+    <section id="chart" class="chart-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> نمودار نرخ ارز</h2>
+                <p>نمایش گرافیکی تغییرات قیمت ارز در بازه زمانی مشخص</p>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-controls">
+                    <div class="date-inputs">
+                        <div>
+                            <label for="from-date">از تاریخ:</label>
+                            <input type="date" id="from-date" class="date-input" value="2025-12-01">
+                        </div>
+                        <div>
+                            <label for="to-date">تا تاریخ:</label>
+                            <input type="date" id="to-date" class="date-input" value="2025-12-31">
+                        </div>
+                    </div>
+                    <button class="show-chart-btn" id="show-chart-btn">
+                        <i class="fas fa-chart-bar"></i> نمایش نمودار
+                    </button>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <canvas id="currency-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-overlay"></div>
-        
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo">
-                    <i class="fas fa-podcast"></i>
-                </div>
-                <p>رادیو گوشه - جایی برای شنیدن بهترین داستان‌ها و گفتگوها</p>
-                
-                <div class="footer-links">
-                    <a href="#">صفحه اصلی</a>
-                    <a href="#">پادکست‌ها</a>
-                    <a href="#">کتاب‌های صوتی</a>
-                    <a href="#">درباره ما</a>
-                    <a href="#">تماس با ما</a>
+                <div class="footer-column">
+                    <h3>طلا فروشی باران</h3>
+                    <p style="color: #cbd5e1; line-height: 1.8;">طلا فروشی باران با بیش از ۳۰ سال سابقه در زمینه خرید و فروش طلا، سکه، شمش و جواهرات، همواره با ارائه بهترین قیمت‌ها و کیفیت برتر در خدمت مشتریان محترم می‌باشد.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
                 
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-telegram"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-spotify"></i></a>
-                    <a href="#"><i class="fab fa-soundcloud"></i></a>
+                <div class="footer-column">
+                    <h3>دسترسی سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> صفحه اصلی</a></li>
+                        <li><a href="#currency"><i class="fas fa-chevron-left"></i> نرخ ارز</a></li>
+                        <li><a href="#coins"><i class="fas fa-chevron-left"></i> سکه بانکی</a></li>
+                        <li><a href="#gold"><i class="fas fa-chevron-left"></i> شمش طلا</a></li>
+                        <li><a href="#chart"><i class="fas fa-chevron-left"></i> نمودارها</a></li>
+                    </ul>
                 </div>
                 
-                <div class="copyright">
-                    <p>© کلیه حقوق این وب‌سایت متعلق به رادیو گوشه می‌باشد. ۱۴۰۲</p>
-                    <p>طراحی و توسعه با ❤️ برای دوستداران صوت و داستان</p>
+                <div class="footer-column">
+                    <h3>اطلاعات تماس</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان جمهوری، پلاک ۱۲۳</p>
+                        <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p><i class="fas fa-mobile-alt"></i> ۰۹۱۲-۱۲۳۴۵۶۷</p>
+                        <p><i class="fas fa-envelope"></i> info@baran-jewelry.com</p>
+                        <p><i class="fas fa-clock"></i> ساعت کاری: ۹ صبح تا ۹ شب</p>
+                    </div>
                 </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© کلیه حقوق این وب‌سایت برای طلا فروشی باران محفوظ می‌باشد. ۱۴۰۴</p>
+                <p>تمامی قیمت‌ها به تومان می‌باشد و به صورت لحظه‌ای به‌روزرسانی می‌شوند.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // کتاب‌های نمونه
-        const books = [
-            {
-                id: 1,
-                title: "قصه‌های شبانه رادیو گوشه",
-                description: "مجموعه‌ای از داستان‌های کوتاه و جذاب برای شب‌های آرام. این کتاب شامل ۳۰ داستان کوتاه از نویسندگان معاصر ایران است که با صدای گویندگان حرفه‌ای روایت شده‌اند.",
-                link: "#",
-                icon: "fas fa-moon"
-            },
-            {
-                id: 2,
-                title: "تاریخ شفاهی ایران",
-                description: "گفتگو با پیشکسوتان و مشاهیر ایرانی در مورد خاطرات و تجربیات آنها از رویدادهای مهم تاریخ معاصر ایران. مجموع‌ای بی‌نظیر از خاطرات ناب.",
-                link: "#",
-                icon: "fas fa-history"
-            },
-            {
-                id: 3,
-                title: "فلسفه برای زندگی",
-                description: "مباحث فلسفی به زبان ساده و کاربردی برای بهبود کیفیت زندگی. این کتاب شامل مفاهیم اصلی فلسفه غرب و شرق است که به شیوه‌ای جذاب روایت شده.",
-                link: "#",
-                icon: "fas fa-brain"
-            },
-            {
-                id: 4,
-                title: "رمان صوتی بیگانه",
-                description: "اقتباس صوتی از رمان مشهور آلبر کامو با گویندگی حرفه‌ای و موسیقی متن اختصاصی. تجربه‌ای سینمایی از شنیدن یک رمان فلسفی.",
-                link: "#",
-                icon: "fas fa-book-open"
-            },
-            {
-                id: 5,
-                title: "روانشناسی روابط",
-                description: "راهنمای عملی برای بهبود روابط بین فردی بر اساس آخرین یافته‌های علم روانشناسی. برای همه کسانی که می‌خواهند روابط بهتری داشته باشند.",
-                link: "#",
-                icon: "fas fa-heart"
-            },
-            {
-                id: 6,
-                title: "علم و اسرار کیهان",
-                description: "سفری شگفت‌انگیز به جهان نجوم و فیزیک کیهانی با زبان ساده و قابل فهم برای همه. از سیاهچاله‌ها تا جهان‌های موازی.",
-                link: "#",
-                icon: "fas fa-star"
-            },
-            {
-                id: 7,
-                title: "شعرهای عاشقانه فارسی",
-                description: "گزیده‌ای از زیباترین شعرهای عاشقانه ادبیات فارسی از حافظ و سعدی تا معاصران، با صدای گرم گویندگان رادیو گوشه.",
-                link: "#",
-                icon: "fas fa-heartbeat"
-            },
-            {
-                id: 8,
-                title: "رازهای موفقیت",
-                description: "مروری بر زندگی و اندیشه‌های افراد موفق جهان. این کتاب صوتی راهکارهای عملی برای رسیدن به موفقیت ارائه می‌دهد.",
-                link: "#",
-                icon: "fas fa-trophy"
-            }
+        // Currency Data
+        const currencyData = [
+            { name: "دلار آمریکا", flag: "https://flagcdn.com/w40/us.png", buy: "125,074", sell: "126,210", change: 0.8 },
+            { name: "یورو", flag: "https://flagcdn.com/w40/eu.png", buy: "147,153", sell: "148,490", change: 0.7 },
+            { name: "پوند انگلیس", flag: "https://flagcdn.com/w40/gb.png", buy: "176,000", sell: "178,000", change: 0.5 },
+            { name: "دلار کانادا", flag: "https://flagcdn.com/w40/ca.png", buy: "96,000", sell: "96,960", change: 0.3 },
+            { name: "درهم امارات", flag: "https://flagcdn.com/w40/ae.png", buy: "35,800", sell: "36,800", change: 0.2 },
+            { name: "دلار استرالیا", flag: "https://flagcdn.com/w40/au.png", buy: "86,000", sell: "86,860", change: -0.1 },
+            { name: "فرانک سوئیس", flag: "https://flagcdn.com/w40/ch.png", buy: "165,000", sell: "166,650", change: 0.4 },
+            { name: "کرون سوئد", flag: "https://flagcdn.com/w40/se.png", buy: "13,000", sell: "13,130", change: 0.2 },
+            { name: "کرون نروژ", flag: "https://flagcdn.com/w40/no.png", buy: "12,800", sell: "12,930", change: 0.3 },
+            { name: "کرون دانمارک", flag: "https://flagcdn.com/w40/dk.png", buy: "20,000", sell: "20,200", change: 0.1 },
+            { name: "لیر ترکیه", flag: "https://flagcdn.com/w40/tr.png", buy: "3,000", sell: "3,080", change: 1.2 },
+            { name: "یوان چین", flag: "https://flagcdn.com/w40/cn.png", buy: "18,700", sell: "18,887", change: 0.5 },
+            { name: "رینگیت مالزی", flag: "https://flagcdn.com/w40/my.png", buy: "32,800", sell: "33,125", change: 0.3 },
+            { name: "بات تایلند", flag: "https://flagcdn.com/w40/th.png", buy: "4,250", sell: "4,292", change: 0.2 },
+            { name: "روبل روسیه", flag: "https://flagcdn.com/w40/ru.png", buy: "1,720", sell: "1,737", change: 0.1 },
+            { name: "درام ارمنستان", flag: "https://flagcdn.com/w40/am.png", buy: "355", sell: "358", change: 0.0 },
+            { name: "منات آذربایجان", flag: "https://flagcdn.com/w40/az.png", buy: "79,000", sell: "79,790", change: 0.4 },
+            { name: "دینار عراق", flag: "https://flagcdn.com/w40/iq.png", buy: "93", sell: "95", change: 0.2 }
         ];
 
-        // عناصر DOM
-        const carouselContainer = document.getElementById('carouselContainer');
-        const carouselDots = document.getElementById('carouselDots');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const particlesContainer = document.getElementById('particles');
-        const floatingElementsContainer = document.getElementById('floatingElements');
+        // Coin Data
+        const coinData = [
+            { name: "تمام امامی(86)", buy: "144,000,000", sell: "149,000,000", change: 0.5 },
+            { name: "تمام بهار آزادی", buy: "139,200,000", sell: "142,200,000", change: -0.3 },
+            { name: "نیم بهار آزادی", buy: "77,500,000", sell: "81,000,000", change: 0.2 },
+            { name: "ربع بهار آزادی", buy: "46,500,000", sell: "49,500,000", change: 0.4 },
+            { name: "سکه یک گرمی", buy: "21,300,000", sell: "21,800,000", change: 0.1 },
+            { name: "امامی(قبل 86)", buy: "139,000,000", sell: "142,000,000", change: 0.3 },
+            { name: "نیم(قبل 86)", buy: "67,000,000", sell: "70,000,000", change: 0.2 },
+            { name: "ربع(قبل 86)", buy: "33,500,000", sell: "35,500,000", change: 0.5 }
+        ];
 
-        // تنظیمات کاروسل
-        let currentIndex = 0;
-        let itemsPerView = 3;
-        let totalItems = books.length;
+        // Gold Data
+        const goldData = [
+            { name: "شمش 5 گرمی 18 عیار", buy: "۰", sell: "76,220,000", change: 0.6 },
+            { name: "شمش 10 گرمی 18 عیار", buy: "۰", sell: "152,440,000", change: 0.6 },
+            { name: "شمش 20 گرمی 18 عیار", buy: "۰", sell: "304,880,000", change: 0.6 },
+            { name: "شمش 20 گرمی 24 عیار", buy: "۰", sell: "404,540,000", change: 0.5 },
+            { name: "طلا 17 عیار مثقالی", buy: "62,540,000", sell: "62,680,000", change: 0.3 },
+            { name: "طلا 18 عیار گرمی", buy: "۰", sell: "14,469,000", change: 0.4 }
+        ];
 
-        // ایجاد ذرات متحرک در هدر
-        function createParticles() {
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // اندازه تصادفی
-                const size = Math.random() * 20 + 5;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // موقعیت تصادفی
-                particle.style.right = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // تاخیر انیمیشن
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                
-                // شفافیت تصادفی
-                particle.style.opacity = Math.random() * 0.5 + 0.3;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
+        // Persian Coin Data
+        const persianCoinData = [
+            { name: "پارسیان 100 سوت", sell: "1,660,000", change: 0.2 },
+            { name: "پارسیان 200 سوت", sell: "3,135,000", change: 0.3 },
+            { name: "پارسیان 300 سوت", sell: "4,615,000", change: 0.4 },
+            { name: "پارسیان 400 سوت", sell: "6,090,000", change: 0.2 },
+            { name: "پارسیان 500 سوت", sell: "7,570,000", change: 0.5 },
+            { name: "پارسیان 600 سوت", sell: "9,050,000", change: 0.3 },
+            { name: "پارسیان 700 سوت", sell: "10,525,000", change: 0.2 },
+            { name: "پارسیان 800 سوت", sell: "12,000,000", change: 0.4 },
+            { name: "پارسیان 900 سوت", sell: "13,480,000", change: 0.3 },
+            { name: "پارسیان 1000 سوت", sell: "15,050,000", change: 0.5 },
+            { name: "پارسیان 1100 سوت", sell: "16,500,000", change: 0.2 },
+            { name: "پارسیان 1200 سوت", sell: "17,980,000", change: 0.4 },
+            { name: "پارسیان 1300 سوت", sell: "19,460,000", change: 0.3 },
+            { name: "پارسیان 1400 سوت", sell: "20,940,000", change: 0.2 },
+            { name: "پارسیان 1500 سوت", sell: "22,420,000", change: 0.5 }
+        ];
 
-        // ایجاد المان‌های شناور
-        function createFloatingElements() {
-            const elementCount = 15;
-            
-            for (let i = 0; i < elementCount; i++) {
-                const element = document.createElement('div');
-                element.classList.add('floating-element');
+        // DOM Elements
+        const currencyTable = document.getElementById('currency-table');
+        const coinTable = document.getElementById('coin-table');
+        const goldTable = document.getElementById('gold-table');
+        const persianCoinTable = document.getElementById('persian-coin-table');
+        
+        // Populate Currency Table
+        function populateCurrencyTable() {
+            currencyTable.innerHTML = '';
+            currencyData.forEach(currency => {
+                const changeClass = currency.change >= 0 ? 'positive' : 'negative';
+                const changeIcon = currency.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                const changeText = currency.change >= 0 ? `+${currency.change}%` : `${currency.change}%`;
                 
-                // اندازه و موقعیت تصادفی
-                const size = Math.random() * 60 + 20;
-                element.style.width = `${size}px`;
-                element.style.height = `${size}px`;
-                element.style.right = `${Math.random() * 100}%`;
-                element.style.top = `${Math.random() * 100}%`;
-                
-                // تاخیر انیمیشن
-                element.style.animationDelay = `${Math.random() * 20}s`;
-                
-                floatingElementsContainer.appendChild(element);
-            }
-        }
-
-        // تابع برای ایجاد کارت کتاب
-        function createBookItem(book) {
-            return `
-                <div class="book-item">
-                    <div class="book-cover">
-                        <i class="${book.icon}"></i>
-                    </div>
-                    <div class="book-info">
-                        <h3>${book.title}</h3>
-                        <p>${book.description}</p>
-                        <a href="${book.link}" class="book-link" target="_blank">
-                            <i class="fas fa-headphones"></i> گوش دادن
-                        </a>
-                    </div>
-                </div>
-            `;
-        }
-
-        // تابع برای به‌روزرسانی کاروسل
-        function updateCarousel() {
-            // محاسبه عرض هر آیتم بر اساس تعداد آیتم‌های در هر صفحه
-            const itemWidth = 100 / itemsPerView;
-            
-            // تنظیم عرض کاروسل و موقعیت
-            carouselContainer.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
-            
-            // به‌روزرسانی دات‌ها
-            updateDots();
-        }
-
-        // تابع برای ایجاد دات‌های کاروسل
-        function createDots() {
-            const dotsCount = Math.ceil(totalItems / itemsPerView);
-            
-            for (let i = 0; i < dotsCount; i++) {
-                const dot = document.createElement('div');
-                dot.classList.add('dot');
-                if (i === 0) dot.classList.add('active');
-                
-                dot.addEventListener('click', () => {
-                    currentIndex = i;
-                    updateCarousel();
-                });
-                
-                carouselDots.appendChild(dot);
-            }
-        }
-
-        // تابع برای به‌روزرسانی وضعیت دات‌ها
-        function updateDots() {
-            const dots = document.querySelectorAll('.dot');
-            const activeDotIndex = Math.floor(currentIndex);
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === activeDotIndex);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="currency-name">
+                            <img src="${currency.flag}" alt="${currency.name}" class="currency-flag">
+                            <span>${currency.name}</span>
+                        </div>
+                    </td>
+                    <td class="buy-price">${currency.buy}</td>
+                    <td class="sell-price">${currency.sell}</td>
+                    <td class="price-change ${changeClass}">
+                        <i class="fas ${changeIcon}"></i> ${changeText}
+                    </td>
+                    <td>
+                        <button class="chart-btn" data-currency="${currency.name}">
+                            <i class="fas fa-chart-line"></i> نمودار
+                        </button>
+                    </td>
+                `;
+                currencyTable.appendChild(row);
             });
         }
-
-        // تابع برای مقداردهی اولیه کاروسل
-        function initCarousel() {
-            // ایجاد آیتم‌های کتاب
-            books.forEach(book => {
-                const bookElement = document.createElement('div');
-                bookElement.innerHTML = createBookItem(book);
-                carouselContainer.appendChild(bookElement.firstElementChild);
+        
+        // Populate Coin Table
+        function populateCoinTable() {
+            coinTable.innerHTML = '';
+            coinData.forEach(coin => {
+                const changeClass = coin.change >= 0 ? 'positive' : 'negative';
+                const changeIcon = coin.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                const changeText = coin.change >= 0 ? `+${coin.change}%` : `${coin.change}%`;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${coin.name}</td>
+                    <td class="buy-price">${coin.buy}</td>
+                    <td class="sell-price">${coin.sell}</td>
+                    <td class="price-change ${changeClass}">
+                        <i class="fas ${changeIcon}"></i> ${changeText}
+                    </td>
+                    <td>
+                        <button class="chart-btn" data-coin="${coin.name}">
+                            <i class="fas fa-chart-line"></i> نمودار
+                        </button>
+                    </td>
+                `;
+                coinTable.appendChild(row);
             });
+        }
+        
+        // Populate Gold Table
+        function populateGoldTable() {
+            goldTable.innerHTML = '';
+            goldData.forEach(gold => {
+                const changeClass = gold.change >= 0 ? 'positive' : 'negative';
+                const changeIcon = gold.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                const changeText = gold.change >= 0 ? `+${gold.change}%` : `${gold.change}%`;
+                
+                const buyCell = gold.buy === "۰" ? `<td class="buy-price" style="color: #94a3b8;">${gold.buy}</td>` : `<td class="buy-price">${gold.buy}</td>`;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${gold.name}</td>
+                    ${buyCell}
+                    <td class="sell-price">${gold.sell}</td>
+                    <td class="price-change ${changeClass}">
+                        <i class="fas ${changeIcon}"></i> ${changeText}
+                    </td>
+                    <td>
+                        <button class="chart-btn" data-gold="${gold.name}">
+                            <i class="fas fa-chart-line"></i> نمودار
+                        </button>
+                    </td>
+                `;
+                goldTable.appendChild(row);
+            });
+        }
+        
+        // Populate Persian Coin Table
+        function populatePersianCoinTable() {
+            persianCoinTable.innerHTML = '';
+            persianCoinData.forEach(coin => {
+                const changeClass = coin.change >= 0 ? 'positive' : 'negative';
+                const changeIcon = coin.change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                const changeText = coin.change >= 0 ? `+${coin.change}%` : `${coin.change}%`;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${coin.name}</td>
+                    <td class="sell-price">${coin.sell}</td>
+                    <td class="price-change ${changeClass}">
+                        <i class="fas ${changeIcon}"></i> ${changeText}
+                    </td>
+                    <td>
+                        <button class="chart-btn" data-persiancoin="${coin.name}">
+                            <i class="fas fa-chart-line"></i> نمودار
+                        </button>
+                    </td>
+                `;
+                persianCoinTable.appendChild(row);
+            });
+        }
+        
+        // Initialize Chart
+        let currencyChart = null;
+        
+        function initializeChart() {
+            const ctx = document.getElementById('currency-chart').getContext('2d');
             
-            // ایجاد دات‌ها
-            createDots();
+            // Sample data for chart
+            const dates = ['10 آذر', '15 آذر', '20 آذر', '25 آذر', '30 آذر', '5 دی', '10 دی'];
+            const usdRates = [122000, 123500, 124200, 125500, 126000, 125200, 125074];
+            const eurRates = [144000, 145500, 146200, 147500, 148000, 147500, 147153];
             
-            // تنظیم رویدادهای دکمه‌ها
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
+            if (currencyChart) {
+                currencyChart.destroy();
+            }
+            
+            currencyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        {
+                            label: 'دلار آمریکا',
+                            data: usdRates,
+                            borderColor: 'rgba(212, 175, 55, 1)',
+                            backgroundColor: 'rgba(212, 175, 55, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'یورو',
+                            data: eurRates,
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                color: '#cbd5e1',
+                                font: {
+                                    family: 'Tahoma',
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#cbd5e1',
+                            bodyColor: '#cbd5e1',
+                            borderColor: 'rgba(212, 175, 55, 0.5)',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: '#94a3b8'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: '#94a3b8',
+                                callback: function(value) {
+                                    return value.toLocaleString('fa-IR') + ' تومان';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'nearest'
+                    }
                 }
             });
-            
-            nextBtn.addEventListener('click', () => {
-                const maxIndex = Math.ceil(totalItems / itemsPerView) - 1;
-                if (currentIndex < maxIndex) {
-                    currentIndex++;
-                    updateCarousel();
-                }
-            });
-            
-            // تنظیم ریسپانسیو کاروسل
-            function handleResize() {
-                // در موبایل فقط یک کتاب نمایش داده می‌شود
-                if (window.innerWidth <= 768) {
-                    itemsPerView = 1;
-                } else if (window.innerWidth <= 1024) {
-                    itemsPerView = 2;
-                } else {
-                    itemsPerView = 3;
-                }
-                
-                updateCarousel();
-            }
-            
-            window.addEventListener('resize', handleResize);
-            handleResize(); // فراخوانی اولیه
         }
-
-        // اسکرول نرم به بخش‌های مختلف
-        function initSmoothScroll() {
-            const scrollDown = document.querySelector('.scroll-down');
-            const introSection = document.querySelector('.intro-section');
-            
-            scrollDown.addEventListener('click', () => {
-                introSection.scrollIntoView({ behavior: 'smooth' });
-            });
-            
-            // انیمیشن اسکرول
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
+        
+        // Update time function
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
             };
+            const persianDate = now.toLocaleDateString('fa-IR', options);
+            document.getElementById('update-time').textContent = persianDate;
+        }
+        
+        // Simulate price updates
+        function updatePrices() {
+            // Randomly adjust prices slightly
+            const usdPrice = document.getElementById('usd-price');
+            const eurPrice = document.getElementById('eur-price');
+            const coinPrice = document.getElementById('coin-price');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+            // Generate small random changes
+            const usdChange = Math.floor(Math.random() * 2000) - 1000;
+            const eurChange = Math.floor(Math.random() * 2500) - 1250;
+            const coinChange = Math.floor(Math.random() * 1000000) - 500000;
+            
+            // Update prices with animation
+            animateValueChange(usdPrice, usdChange);
+            animateValueChange(eurPrice, eurChange);
+            animateValueChange(coinPrice, coinChange);
+        }
+        
+        // Animate value change
+        function animateValueChange(element, change) {
+            const currentValue = parseFloat(element.textContent.replace(/,/g, ''));
+            const newValue = currentValue + change;
+            
+            // Update the element with animation effect
+            element.style.transform = 'scale(1.1)';
+            element.style.color = change >= 0 ? 'var(--success)' : 'var(--danger)';
+            
+            setTimeout(() => {
+                element.textContent = newValue.toLocaleString('fa-IR');
+                element.style.transform = 'scale(1)';
+                element.style.color = 'var(--white)';
+            }, 300);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            populateCurrencyTable();
+            populateCoinTable();
+            populateGoldTable();
+            populatePersianCoinTable();
+            initializeChart();
+            
+            // Update prices every 30 seconds
+            setInterval(updatePrices, 30000);
+            
+            // Add pulse animation to gold price card every 10 seconds
+            setInterval(() => {
+                const goldCard = document.querySelector('.gold-price-card');
+                goldCard.classList.add('pulse');
+                setTimeout(() => goldCard.classList.remove('pulse'), 2000);
+            }, 10000);
+            
+            // Chart button event
+            document.getElementById('show-chart-btn').addEventListener('click', function() {
+                alert('نمودار با موفقیت بروزرسانی شد! (این یک نمونه نمایشی است)');
+                initializeChart();
+            });
+            
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
                     }
                 });
-            }, observerOptions);
-            
-            // مشاهده آیتم‌های کتاب
-            document.querySelectorAll('.book-item').forEach(item => {
-                observer.observe(item);
             });
-        }
-
-        // راه‌اندازی پس از لود صفحه
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            createFloatingElements();
-            initCarousel();
-            initSmoothScroll();
             
-            // انیمیشن‌های ورود
-            setTimeout(() => {
-                document.querySelector('.header-content h1').classList.add('animate__fadeInDown');
-                document.querySelector('.header-content p').classList.add('animate__fadeIn');
-            }, 300);
+            // Chart buttons in tables
+            document.querySelectorAll('.chart-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const currency = this.getAttribute('data-currency');
+                    const coin = this.getAttribute('data-coin');
+                    const gold = this.getAttribute('data-gold');
+                    const persiancoin = this.getAttribute('data-persiancoin');
+                    
+                    let itemName = '';
+                    if (currency) itemName = currency;
+                    if (coin) itemName = coin;
+                    if (gold) itemName = gold;
+                    if (persiancoin) itemName = persiancoin;
+                    
+                    alert(`نمودار ${itemName} در حال نمایش است. (این یک نمونه نمایشی است)`);
+                });
+            });
         });
     </script>
 </body>
