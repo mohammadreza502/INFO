@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mohammadreza Hedayati · Network Engineer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="Personal page of Mohammadreza Hedayati - ICT & Computer Networks.">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/471/471664.png" type="image/png">
     <!-- Font Awesome 6 -->
@@ -20,15 +20,19 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Montserrat', sans-serif;
             background: #08070f;
-            padding: 2rem 1.5rem;
+            padding: 1rem;
             position: relative;
             overflow-x: hidden;
         }
@@ -129,7 +133,7 @@
             background: linear-gradient(135deg, #00e5b0, #00b8d4);
             color: #08070f;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: clamp(0.5rem, 1.2vw, 0.7rem);
             letter-spacing: 1.8px;
             text-transform: uppercase;
             padding: 6px 18px;
@@ -199,8 +203,8 @@
         }
 
         .round {
-            width: 140px;
-            height: 140px;
+            width: clamp(90px, 20vw, 140px);
+            height: clamp(90px, 20vw, 140px);
             border-radius: 50%;
             border: 2px solid rgba(0, 255, 200, 0.5);
             padding: 5px;
@@ -220,9 +224,9 @@
 
         /* ---------- NAME ---------- */
         h3 {
-            font-size: 2.1rem;
+            font-size: clamp(1.3rem, 4vw, 2.1rem);
             font-weight: 700;
-            margin: 22px 0 6px;
+            margin: 22px 0 4px;
             background: linear-gradient(to right, #f0f9ff, #80d0ff, #b0e0ff);
             -webkit-background-clip: text;
             background-clip: text;
@@ -230,48 +234,23 @@
             letter-spacing: -0.5px;
             font-family: 'Orbitron', sans-serif;
             text-shadow: 0 0 40px rgba(0, 150, 255, 0.15);
+            word-break: break-word;
         }
 
-        /* ---------- LOCATION ---------- */
-        .location {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(0, 255, 200, 0.05);
-            padding: 6px 20px 6px 16px;
-            border-radius: 40px;
-            border: 1px solid rgba(0, 255, 200, 0.10);
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #90b0d0;
-            margin-bottom: 14px;
-            backdrop-filter: blur(4px);
-        }
-
-        .location i {
-            color: #00e5b0;
-        }
-
-        .flag {
-            width: 24px;
-            height: auto;
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ---------- TITLE ---------- */
+        /* ---------- TITLE (ICT & Networks) ---------- */
         .title {
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 2vw, 1rem);
             font-weight: 300;
             letter-spacing: 1.5px;
             color: #80a0c0;
-            margin: 6px 0 0;
+            margin: 6px 0 2px;
             padding: 8px 24px;
             display: inline-block;
             border-top: 1px solid rgba(0, 255, 200, 0.12);
             border-bottom: 1px solid rgba(0, 255, 200, 0.12);
             border-radius: 40px;
             background: rgba(0, 0, 0, 0.2);
+            word-break: break-word;
         }
 
         .title strong {
@@ -284,12 +263,38 @@
             margin: 0 6px;
         }
 
+        /* ---------- LOCATION (زیر عنوان) ---------- */
+        .location-sub {
+            font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+            color: #6090a8;
+            margin: 4px 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+            flex-wrap: wrap;
+        }
+
+        .location-sub i {
+            color: #00e5b0;
+            font-size: 0.8rem;
+        }
+
+        .location-sub .flag {
+            width: clamp(16px, 3vw, 20px);
+            height: auto;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
         /* ---------- SOCIAL ICONS ---------- */
         .social-icons {
-            margin: 26px 0 14px;
+            margin: 18px 0 12px;
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: clamp(10px, 2.5vw, 16px);
             flex-wrap: wrap;
         }
 
@@ -297,12 +302,12 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 52px;
-            height: 52px;
+            width: clamp(42px, 9vw, 52px);
+            height: clamp(42px, 9vw, 52px);
             background: rgba(0, 255, 200, 0.04);
             border-radius: 50%;
             color: #b0c8e0;
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
             border: 1px solid rgba(0, 255, 200, 0.10);
             transition: all 0.3s ease;
             text-decoration: none;
@@ -332,32 +337,76 @@
             opacity: 1;
         }
 
-        /* ---------- NETWORK STATS (مرتبط با شبکه) ---------- */
+        /* ---------- NETWORK STATS (آمار شبکه) ---------- */
         .network-stats {
             display: flex;
             justify-content: center;
-            gap: 28px;
-            margin: 14px 0 6px;
-            font-size: 0.7rem;
-            font-family: 'Orbitron', sans-serif;
-            color: #406070;
-            letter-spacing: 0.5px;
+            gap: clamp(8px, 2.5vw, 20px);
+            margin: 10px 0 8px;
+            flex-wrap: wrap;
         }
 
-        .network-stats span {
+        .network-stats .stat-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 2px;
+            min-width: 50px;
         }
 
-        .network-stats i {
-            color: #00e5b0;
-            font-size: 0.75rem;
+        .network-stats .stat-item .label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.4rem, 1vw, 0.55rem);
+            letter-spacing: 1px;
+            color: #406070;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        .network-stats .value {
-            color: #80c8d8;
+        .network-stats .stat-item .value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.65rem, 1.6vw, 0.85rem);
             font-weight: 600;
+            color: #80c8d8;
+        }
+
+        .network-stats .stat-item .value i {
+            color: #00e5b0;
+            font-size: clamp(0.5rem, 1vw, 0.65rem);
+            margin-right: 4px;
+        }
+
+        /* ---------- CISCO-STYLE ANIMATED SIGNAL ---------- */
+        .signal-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: clamp(3px, 0.8vw, 4px);
+            height: clamp(20px, 5vw, 28px);
+            margin: 8px 0 4px;
+            padding: 6px clamp(10px, 2vw, 16px);
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 200, 0.06);
+        }
+
+        .signal-bars .bar {
+            width: clamp(3px, 1vw, 5px);
+            background: linear-gradient(to top, #00e5b0, #00b8d4);
+            border-radius: 3px;
+            transition: height 0.3s ease;
+            box-shadow: 0 0 8px rgba(0, 229, 176, 0.15);
+        }
+
+        .signal-bars .bar:nth-child(1) { height: 20%; animation: signalPulse 1.0s ease-in-out infinite alternate; }
+        .signal-bars .bar:nth-child(2) { height: 40%; animation: signalPulse 1.2s ease-in-out infinite alternate 0.2s; }
+        .signal-bars .bar:nth-child(3) { height: 65%; animation: signalPulse 1.4s ease-in-out infinite alternate 0.4s; }
+        .signal-bars .bar:nth-child(4) { height: 85%; animation: signalPulse 1.6s ease-in-out infinite alternate 0.6s; }
+        .signal-bars .bar:nth-child(5) { height: 100%; animation: signalPulse 1.8s ease-in-out infinite alternate 0.8s; }
+
+        @keyframes signalPulse {
+            0% { opacity: 0.3; transform: scaleY(0.7); }
+            100% { opacity: 1; transform: scaleY(1); }
         }
 
         /* ---------- TRAFFIC EQUALIZER ---------- */
@@ -365,25 +414,25 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 6px;
-            height: 30px;
-            margin: 12px 0 4px;
+            gap: clamp(3px, 0.8vw, 6px);
+            height: clamp(20px, 5vw, 28px);
+            margin: 8px 0 4px;
         }
 
         .traffic-equalizer .bar {
-            width: 6px;
+            width: clamp(3px, 1vw, 5px);
             background: linear-gradient(to top, #00e5b0, #0088ff);
-            border-radius: 4px;
+            border-radius: 3px;
             animation: trafficPulse 1.2s ease-in-out infinite alternate;
-            box-shadow: 0 0 10px rgba(0, 229, 176, 0.2);
+            box-shadow: 0 0 10px rgba(0, 229, 176, 0.15);
         }
 
         .traffic-equalizer .bar:nth-child(1) { height: 30%; animation-delay: 0.0s; }
-        .traffic-equalizer .bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
-        .traffic-equalizer .bar:nth-child(3) { height: 90%; animation-delay: 0.4s; }
+        .traffic-equalizer .bar:nth-child(2) { height: 55%; animation-delay: 0.2s; }
+        .traffic-equalizer .bar:nth-child(3) { height: 85%; animation-delay: 0.4s; }
         .traffic-equalizer .bar:nth-child(4) { height: 45%; animation-delay: 0.6s; }
-        .traffic-equalizer .bar:nth-child(5) { height: 75%; animation-delay: 0.8s; }
-        .traffic-equalizer .bar:nth-child(6) { height: 100%; animation-delay: 1.0s; }
+        .traffic-equalizer .bar:nth-child(5) { height: 70%; animation-delay: 0.8s; }
+        .traffic-equalizer .bar:nth-child(6) { height: 95%; animation-delay: 1.0s; }
 
         @keyframes trafficPulse {
             0% { transform: scaleY(0.4); opacity: 0.4; }
@@ -392,8 +441,8 @@
 
         /* ---------- SKILLS ---------- */
         .skills {
-            margin-top: 20px;
-            padding: 20px 16px 14px;
+            margin-top: 16px;
+            padding: clamp(12px, 2.5vw, 18px) clamp(10px, 2vw, 16px) clamp(10px, 2vw, 12px);
             background: rgba(0, 0, 0, 0.30);
             border-radius: 28px;
             border: 1px solid rgba(0, 255, 200, 0.06);
@@ -403,16 +452,17 @@
 
         .skills h6 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
+            font-size: clamp(0.55rem, 1.4vw, 0.7rem);
             letter-spacing: 2.5px;
             text-transform: uppercase;
             color: #50b8c8;
-            margin-bottom: 16px;
+            margin-bottom: clamp(10px, 2vw, 14px);
             opacity: 0.9;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .skills h6 i {
@@ -424,7 +474,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px 14px;
+            gap: clamp(5px, 1.5vw, 12px) clamp(6px, 1.5vw, 12px);
             padding: 0;
         }
 
@@ -432,13 +482,22 @@
             background: rgba(0, 200, 180, 0.06);
             border: 1px solid rgba(0, 255, 200, 0.08);
             border-radius: 40px;
-            padding: 8px 22px;
-            font-size: 0.8rem;
+            padding: clamp(4px, 1vw, 6px) clamp(10px, 2.5vw, 18px);
+            font-size: clamp(0.55rem, 1.3vw, 0.75rem);
             font-weight: 500;
             color: #b0d0e8;
             letter-spacing: 0.4px;
             transition: all 0.25s ease;
             backdrop-filter: blur(2px);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 400px) {
+            .skills ul li {
+                white-space: normal;
+                font-size: 0.6rem;
+                padding: 4px 10px;
+            }
         }
 
         .skills ul li:hover {
@@ -451,15 +510,15 @@
 
         /* ---------- FOOTER (فقط کپی‌رایت) ---------- */
         footer {
-            margin-top: 2.8rem;
+            margin-top: clamp(1.5rem, 4vh, 2.5rem);
             text-align: center;
-            font-size: 0.75rem;
+            font-size: clamp(0.6rem, 1.4vw, 0.75rem);
             color: #405570;
             letter-spacing: 1px;
             position: relative;
             z-index: 2;
             border-top: 1px solid rgba(0, 255, 200, 0.04);
-            padding-top: 1.8rem;
+            padding-top: clamp(1rem, 2.5vh, 1.6rem);
             width: 100%;
             max-width: 540px;
         }
@@ -468,61 +527,150 @@
             margin: 0;
         }
 
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 540px) {
+        /* ---------- RESPONSIVE BREAKPOINTS ---------- */
+        @media (max-width: 480px) {
+            body {
+                padding: 0.75rem;
+            }
             .card-container {
-                padding: 2rem 1.5rem 1.8rem;
+                padding: 1.8rem 1.2rem 1.5rem;
                 border-radius: 32px;
-            }
-            h3 {
-                font-size: 1.6rem;
-            }
-            .round {
-                width: 110px;
-                height: 110px;
+                margin: 10px 0;
             }
             .info-label {
-                font-size: 0.55rem;
-                padding: 4px 12px;
                 top: 14px;
-                left: 16px;
-            }
-            .social-icons a {
-                width: 44px;
-                height: 44px;
-                font-size: 1.1rem;
-            }
-            .skills ul li {
-                font-size: 0.7rem;
-                padding: 6px 14px;
+                left: 14px;
+                padding: 4px 12px;
+                font-size: 0.5rem;
+                letter-spacing: 1.2px;
             }
             .network-stats {
-                gap: 16px;
-                font-size: 0.6rem;
-                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .network-stats .stat-item {
+                min-width: 40px;
             }
             .title {
-                font-size: 0.85rem;
-                padding: 6px 16px;
+                padding: 6px 14px;
+                font-size: 0.7rem;
             }
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 380px) {
             .card-container {
-                padding: 1.6rem 1rem 1.4rem;
-            }
-            h3 {
-                font-size: 1.3rem;
-            }
-            .round {
-                width: 90px;
-                height: 90px;
+                padding: 1.4rem 0.8rem 1.2rem;
+                border-radius: 24px;
             }
             .info-label {
-                font-size: 0.5rem;
+                top: 10px;
+                left: 10px;
+                padding: 3px 8px;
+                font-size: 0.45rem;
+                letter-spacing: 1px;
+            }
+            .social-icons a {
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+            }
+            .network-stats .stat-item .label {
+                font-size: 0.35rem;
+            }
+            .network-stats .stat-item .value {
+                font-size: 0.55rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            /* تبلت‌ها */
+            .card-container {
+                max-width: 480px;
+                padding: 2.4rem 2.2rem 2rem;
+            }
+            .round {
+                width: 130px;
+                height: 130px;
+            }
+            .social-icons a {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            /* دسکتاپ */
+            .card-container {
+                max-width: 540px;
+            }
+        }
+
+        /* ---------- ORIENTATION: landscape on phones ---------- */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .card-container {
+                padding: 1.2rem 1.5rem 1rem;
+                border-radius: 28px;
+                max-width: 480px;
+            }
+            .round {
+                width: 70px;
+                height: 70px;
+            }
+            h3 {
+                font-size: 1.2rem;
+                margin: 10px 0 2px;
+            }
+            .social-icons {
+                margin: 10px 0 6px;
+                gap: 8px;
+            }
+            .social-icons a {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            .skills {
+                margin-top: 10px;
+                padding: 10px 12px 8px;
+            }
+            .skills ul {
+                gap: 4px 8px;
+            }
+            .skills ul li {
                 padding: 3px 10px;
+                font-size: 0.55rem;
+            }
+            .network-stats {
+                gap: 6px;
+                margin: 4px 0;
+            }
+            .signal-bars {
+                height: 16px;
+                padding: 3px 10px;
+                margin: 4px 0;
+            }
+            .traffic-equalizer {
+                height: 16px;
+                margin: 4px 0;
+            }
+            .info-label {
                 top: 10px;
                 left: 12px;
+                padding: 3px 10px;
+                font-size: 0.45rem;
+            }
+            footer {
+                margin-top: 1rem;
+                padding-top: 0.8rem;
+            }
+            .location-sub {
+                margin: 2px 0 6px;
+                font-size: 0.65rem;
+            }
+            .title {
+                padding: 4px 12px;
+                font-size: 0.65rem;
+                margin: 4px 0 0;
             }
         }
     </style>
@@ -553,13 +701,15 @@
 
             <h3>Mohammadreza</h3>
 
-            <div class="location">
-                <i class="fas fa-map-pin"></i> Tehran, Iran
-                <img class="flag" src="https://flagcdn.com/w20/ir.png" srcset="https://flagcdn.com/w40/ir.png 2x" alt="Iran flag">
-            </div>
-
+            <!-- Title: ICT & Networks -->
             <div class="title">
                 <i class="fas fa-server"></i> <strong>ICT</strong> &amp; <strong>Networks</strong> <i class="fas fa-wifi"></i>
+            </div>
+
+            <!-- Location: زیر عنوان -->
+            <div class="location-sub">
+                <i class="fas fa-map-pin"></i> Tehran, Iran
+                <img class="flag" src="https://flagcdn.com/w20/ir.png" srcset="https://flagcdn.com/w40/ir.png 2x" alt="Iran flag">
             </div>
 
             <!-- Social Icons -->
@@ -578,12 +728,33 @@
                 </a>
             </div>
 
-            <!-- Network Stats (مرتبط با شبکه) -->
+            <!-- Network Stats -->
             <div class="network-stats">
-                <span><i class="fas fa-clock"></i> <span class="value">Uptime</span> 42d</span>
-                <span><i class="fas fa-bolt"></i> <span class="value">Ping</span> 12ms</span>
-                <span><i class="fas fa-chart-line"></i> <span class="value">Loss</span> 0.0%</span>
-                <span><i class="fas fa-wifi"></i> <span class="value">Signal</span> -52dBm</span>
+                <div class="stat-item">
+                    <span class="label"><i class="fas fa-clock"></i> Uptime</span>
+                    <span class="value">42d</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label"><i class="fas fa-bolt"></i> Ping</span>
+                    <span class="value">12ms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label"><i class="fas fa-chart-line"></i> Loss</span>
+                    <span class="value">0.0%</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label"><i class="fas fa-wifi"></i> Signal</span>
+                    <span class="value">-52dBm</span>
+                </div>
+            </div>
+
+            <!-- Cisco-style Animated Signal Bars -->
+            <div class="signal-bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
             </div>
 
             <!-- Traffic Equalizer -->
@@ -616,7 +787,7 @@
         </div>
     </main>
 
-    <!-- ====== FOOTER (فقط کپی‌رایت) ====== -->
+    <!-- ====== FOOTER ====== -->
     <footer>
         <p>© 2026 · Mohammadreza Hedayati</p>
     </footer>
