@@ -55,7 +55,7 @@
             font-family: 'Orbitron', monospace;
             font-size: 14px;
             font-weight: 700;
-            color: rgba(0, 255, 200, 0.08);
+            color: rgba(0, 255, 200, 0.06);
             pointer-events: none;
             z-index: 0;
             animation: fall linear infinite;
@@ -73,51 +73,38 @@
         .card-container {
             position: relative;
             z-index: 2;
-            background: rgba(12, 14, 30, 0.75);
+            background: rgba(12, 14, 30, 0.7);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-radius: 48px;
-            padding: 2.8rem 2.8rem 2.2rem;
-            max-width: 540px;
+            border-radius: 40px;
+            padding: 2.5rem 2rem 2rem;
+            max-width: 480px;
             width: 100%;
             box-shadow:
                 0 30px 80px -15px rgba(0, 0, 0, 0.9),
                 inset 0 1px 1px rgba(255, 255, 255, 0.06),
-                0 0 0 1px rgba(0, 255, 200, 0.12);
-            border: 1px solid rgba(0, 255, 200, 0.08);
+                0 0 0 1px rgba(0, 255, 200, 0.10);
+            border: 1px solid rgba(0, 255, 200, 0.06);
             transition: all 0.4s ease;
             text-align: center;
             margin: 20px 0;
         }
 
+        /* subtle glow ring */
         .card-container::before {
             content: '';
             position: absolute;
             inset: -3px;
-            border-radius: 50px;
+            border-radius: 42px;
             background: conic-gradient(from 0deg,
                     transparent,
-                    rgba(0, 255, 200, 0.15),
-                    rgba(0, 150, 255, 0.2),
-                    rgba(200, 0, 255, 0.10),
-                    transparent,
-                    rgba(0, 255, 200, 0.15),
+                    rgba(0, 255, 200, 0.10),
+                    rgba(0, 150, 255, 0.10),
                     transparent);
             z-index: -1;
-            animation: spinGlow 8s linear infinite;
-            opacity: 0.6;
-            filter: blur(10px);
-        }
-
-        .card-container::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 48px;
-            background: linear-gradient(135deg, rgba(0, 255, 200, 0.08), rgba(0, 150, 255, 0.04), rgba(200, 0, 255, 0.06));
-            z-index: -1;
-            filter: blur(6px);
-            opacity: 0.6;
+            animation: spinGlow 10s linear infinite;
+            opacity: 0.4;
+            filter: blur(8px);
         }
 
         @keyframes spinGlow {
@@ -128,36 +115,36 @@
         /* ---------- BADGE ---------- */
         .info-label {
             position: absolute;
-            top: 20px;
-            left: 24px;
+            top: 16px;
+            left: 20px;
             background: linear-gradient(135deg, #00e5b0, #00b8d4);
             color: #08070f;
             font-weight: 700;
-            font-size: clamp(0.5rem, 1.2vw, 0.7rem);
-            letter-spacing: 1.8px;
+            font-size: clamp(0.5rem, 1.2vw, 0.65rem);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            padding: 6px 18px;
+            padding: 4px 14px;
             border-radius: 40px;
-            box-shadow: 0 0 25px rgba(0, 230, 180, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 230, 180, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.10);
             font-family: 'Orbitron', sans-serif;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
-        /* ---------- AVATAR + RADAR ---------- */
+        /* ---------- AVATAR + RADAR (ظریف‌تر) ---------- */
         .avatar-wrapper {
-            margin-top: 12px;
+            margin-top: 10px;
             position: relative;
             display: inline-block;
         }
 
         .avatar-wrapper .radar-ring {
             position: absolute;
-            inset: -12px;
+            inset: -10px;
             border-radius: 50%;
-            background: radial-gradient(circle, transparent 30%, rgba(0, 255, 200, 0.03) 70%, transparent 100%);
+            background: radial-gradient(circle, transparent 30%, rgba(0, 255, 200, 0.02) 70%, transparent 100%);
             z-index: 0;
             overflow: hidden;
         }
@@ -169,9 +156,9 @@
             left: 50%;
             width: 100%;
             height: 50%;
-            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 200, 0.25), transparent);
+            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 200, 0.15), transparent);
             transform-origin: center center;
-            animation: radarSweep 3s linear infinite;
+            animation: radarSweep 4s linear infinite;
             border-radius: 50% 50% 0 0;
             transform: translate(-50%, -50%) rotate(0deg);
         }
@@ -181,76 +168,53 @@
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
-        .avatar-wrapper .ping-ring {
-            position: absolute;
-            inset: -15px;
-            border-radius: 50%;
-            border: 1px solid rgba(0, 255, 200, 0.3);
-            animation: pingExpand 2.5s ease-out infinite;
-            z-index: 0;
-        }
-
-        .avatar-wrapper .ping-ring:nth-child(2) {
-            animation-delay: 0.8s;
-        }
-        .avatar-wrapper .ping-ring:nth-child(3) {
-            animation-delay: 1.6s;
-        }
-
-        @keyframes pingExpand {
-            0% { transform: scale(0.8); opacity: 0.8; }
-            100% { transform: scale(1.6); opacity: 0; }
-        }
-
         .round {
-            width: clamp(90px, 20vw, 140px);
-            height: clamp(90px, 20vw, 140px);
+            width: clamp(90px, 20vw, 130px);
+            height: clamp(90px, 20vw, 130px);
             border-radius: 50%;
-            border: 2px solid rgba(0, 255, 200, 0.5);
-            padding: 5px;
+            border: 2px solid rgba(0, 255, 200, 0.4);
+            padding: 4px;
             background: #0d0c1a;
-            box-shadow: 0 0 40px rgba(0, 255, 200, 0.15), inset 0 0 30px rgba(0, 255, 200, 0.05);
-            transition: 0.4s;
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.10);
+            transition: 0.3s;
             object-fit: cover;
             position: relative;
             z-index: 1;
         }
 
         .round:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
             border-color: #00e5b0;
-            box-shadow: 0 0 60px rgba(0, 255, 200, 0.3);
+            box-shadow: 0 0 50px rgba(0, 255, 200, 0.2);
         }
 
         /* ---------- NAME ---------- */
         h3 {
-            font-size: clamp(1.3rem, 4vw, 2.1rem);
+            font-size: clamp(1.4rem, 4vw, 2rem);
             font-weight: 700;
-            margin: 22px 0 4px;
+            margin: 18px 0 4px;
             background: linear-gradient(to right, #f0f9ff, #80d0ff, #b0e0ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
             font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 40px rgba(0, 150, 255, 0.15);
-            word-break: break-word;
+            text-shadow: 0 0 40px rgba(0, 150, 255, 0.10);
         }
 
         /* ---------- TITLE (ICT & Networks) ---------- */
         .title {
-            font-size: clamp(0.75rem, 2vw, 1rem);
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
             font-weight: 300;
             letter-spacing: 1.5px;
             color: #80a0c0;
             margin: 6px 0 2px;
-            padding: 8px 24px;
+            padding: 6px 20px;
             display: inline-block;
-            border-top: 1px solid rgba(0, 255, 200, 0.12);
-            border-bottom: 1px solid rgba(0, 255, 200, 0.12);
+            border-top: 1px solid rgba(0, 255, 200, 0.10);
+            border-bottom: 1px solid rgba(0, 255, 200, 0.10);
             border-radius: 40px;
-            background: rgba(0, 0, 0, 0.2);
-            word-break: break-word;
+            background: rgba(0, 0, 0, 0.15);
         }
 
         .title strong {
@@ -263,11 +227,11 @@
             margin: 0 6px;
         }
 
-        /* ---------- LOCATION (زیر عنوان) ---------- */
+        /* ---------- LOCATION ---------- */
         .location-sub {
-            font-size: clamp(0.7rem, 1.6vw, 0.85rem);
+            font-size: clamp(0.7rem, 1.6vw, 0.8rem);
             color: #6090a8;
-            margin: 4px 0 10px;
+            margin: 6px 0 14px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -291,10 +255,10 @@
 
         /* ---------- SOCIAL ICONS ---------- */
         .social-icons {
-            margin: 18px 0 12px;
+            margin: 16px 0 14px;
             display: flex;
             justify-content: center;
-            gap: clamp(10px, 2.5vw, 16px);
+            gap: clamp(12px, 2.5vw, 18px);
             flex-wrap: wrap;
         }
 
@@ -302,171 +266,71 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: clamp(42px, 9vw, 52px);
-            height: clamp(42px, 9vw, 52px);
+            width: clamp(44px, 9vw, 52px);
+            height: clamp(44px, 9vw, 52px);
             background: rgba(0, 255, 200, 0.04);
             border-radius: 50%;
             color: #b0c8e0;
-            font-size: clamp(1rem, 2.2vw, 1.3rem);
-            border: 1px solid rgba(0, 255, 200, 0.10);
+            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+            border: 1px solid rgba(0, 255, 200, 0.08);
             transition: all 0.3s ease;
             text-decoration: none;
-            backdrop-filter: blur(4px);
-            position: relative;
-        }
-
-        .social-icons a::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 255, 200, 0.15), transparent 70%);
-            opacity: 0;
-            transition: 0.3s;
         }
 
         .social-icons a:hover {
             background: rgba(0, 255, 200, 0.12);
             color: #00e5b0;
             border-color: #00e5b0;
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 0 35px rgba(0, 255, 200, 0.15);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.10);
         }
 
-        .social-icons a:hover::after {
-            opacity: 1;
-        }
-
-        /* ---------- NETWORK STATS (آمار شبکه) ---------- */
+        /* ---------- NETWORK STATS (فشرده و مرتب) ---------- */
         .network-stats {
             display: flex;
             justify-content: center;
-            gap: clamp(8px, 2.5vw, 20px);
-            margin: 10px 0 8px;
+            gap: clamp(12px, 3vw, 24px);
+            margin: 10px 0 6px;
             flex-wrap: wrap;
         }
 
         .network-stats .stat-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 2px;
-            min-width: 50px;
+            gap: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+            color: #80a8c0;
         }
 
-        .network-stats .stat-item .label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(0.4rem, 1vw, 0.55rem);
-            letter-spacing: 1px;
-            color: #406070;
-            text-transform: uppercase;
-            white-space: nowrap;
+        .network-stats .stat-item i {
+            color: #00e5b0;
+            font-size: 0.7rem;
+            width: 1.2em;
         }
 
         .network-stats .stat-item .value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(0.65rem, 1.6vw, 0.85rem);
             font-weight: 600;
-            color: #80c8d8;
+            color: #b0d8e8;
         }
 
-        .network-stats .stat-item .value i {
-            color: #00e5b0;
-            font-size: clamp(0.5rem, 1vw, 0.65rem);
-            margin-right: 4px;
-        }
-
-        /* ---------- CISCO-STYLE ANIMATED SIGNAL ---------- */
-        .signal-bars {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            gap: clamp(3px, 0.8vw, 4px);
-            height: clamp(20px, 5vw, 28px);
-            margin: 8px 0 4px;
-            padding: 6px clamp(10px, 2vw, 16px);
-            background: rgba(0, 0, 0, 0.25);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 255, 200, 0.06);
-        }
-
-        .signal-bars .bar {
-            width: clamp(3px, 1vw, 5px);
-            background: linear-gradient(to top, #00e5b0, #00b8d4);
-            border-radius: 3px;
-            transition: height 0.3s ease;
-            box-shadow: 0 0 8px rgba(0, 229, 176, 0.15);
-        }
-
-        .signal-bars .bar:nth-child(1) { height: 20%; animation: signalPulse 1.0s ease-in-out infinite alternate; }
-        .signal-bars .bar:nth-child(2) { height: 40%; animation: signalPulse 1.2s ease-in-out infinite alternate 0.2s; }
-        .signal-bars .bar:nth-child(3) { height: 65%; animation: signalPulse 1.4s ease-in-out infinite alternate 0.4s; }
-        .signal-bars .bar:nth-child(4) { height: 85%; animation: signalPulse 1.6s ease-in-out infinite alternate 0.6s; }
-        .signal-bars .bar:nth-child(5) { height: 100%; animation: signalPulse 1.8s ease-in-out infinite alternate 0.8s; }
-
-        @keyframes signalPulse {
-            0% { opacity: 0.3; transform: scaleY(0.7); }
-            100% { opacity: 1; transform: scaleY(1); }
-        }
-
-        /* ---------- TRAFFIC EQUALIZER ---------- */
-        .traffic-equalizer {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: clamp(3px, 0.8vw, 6px);
-            height: clamp(20px, 5vw, 28px);
-            margin: 8px 0 4px;
-        }
-
-        .traffic-equalizer .bar {
-            width: clamp(3px, 1vw, 5px);
-            background: linear-gradient(to top, #00e5b0, #0088ff);
-            border-radius: 3px;
-            animation: trafficPulse 1.2s ease-in-out infinite alternate;
-            box-shadow: 0 0 10px rgba(0, 229, 176, 0.15);
-        }
-
-        .traffic-equalizer .bar:nth-child(1) { height: 30%; animation-delay: 0.0s; }
-        .traffic-equalizer .bar:nth-child(2) { height: 55%; animation-delay: 0.2s; }
-        .traffic-equalizer .bar:nth-child(3) { height: 85%; animation-delay: 0.4s; }
-        .traffic-equalizer .bar:nth-child(4) { height: 45%; animation-delay: 0.6s; }
-        .traffic-equalizer .bar:nth-child(5) { height: 70%; animation-delay: 0.8s; }
-        .traffic-equalizer .bar:nth-child(6) { height: 95%; animation-delay: 1.0s; }
-
-        @keyframes trafficPulse {
-            0% { transform: scaleY(0.4); opacity: 0.4; }
-            100% { transform: scaleY(1); opacity: 1; }
-        }
-
-        /* ---------- SKILLS ---------- */
+        /* ---------- SKILLS (تگ‌های کوچک) ---------- */
         .skills {
-            margin-top: 16px;
-            padding: clamp(12px, 2.5vw, 18px) clamp(10px, 2vw, 16px) clamp(10px, 2vw, 12px);
-            background: rgba(0, 0, 0, 0.30);
-            border-radius: 28px;
-            border: 1px solid rgba(0, 255, 200, 0.06);
-            text-align: center;
-            backdrop-filter: blur(4px);
+            margin-top: 18px;
+            padding: 16px 14px 12px;
+            background: rgba(0, 0, 0, 0.20);
+            border-radius: 24px;
+            border: 1px solid rgba(0, 255, 200, 0.04);
         }
 
         .skills h6 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(0.55rem, 1.4vw, 0.7rem);
-            letter-spacing: 2.5px;
+            font-size: clamp(0.55rem, 1.4vw, 0.65rem);
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: #50b8c8;
-            margin-bottom: clamp(10px, 2vw, 14px);
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .skills h6 i {
-            color: #00e5b0;
+            margin-bottom: 12px;
+            opacity: 0.8;
         }
 
         .skills ul {
@@ -474,143 +338,86 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: clamp(5px, 1.5vw, 12px) clamp(6px, 1.5vw, 12px);
+            gap: 6px 10px;
             padding: 0;
         }
 
         .skills ul li {
-            background: rgba(0, 200, 180, 0.06);
-            border: 1px solid rgba(0, 255, 200, 0.08);
+            background: rgba(0, 200, 180, 0.05);
+            border: 1px solid rgba(0, 255, 200, 0.06);
             border-radius: 40px;
-            padding: clamp(4px, 1vw, 6px) clamp(10px, 2.5vw, 18px);
-            font-size: clamp(0.55rem, 1.3vw, 0.75rem);
+            padding: 4px 14px;
+            font-size: clamp(0.55rem, 1.2vw, 0.7rem);
             font-weight: 500;
             color: #b0d0e8;
-            letter-spacing: 0.4px;
-            transition: all 0.25s ease;
-            backdrop-filter: blur(2px);
-            white-space: nowrap;
-        }
-
-        @media (max-width: 400px) {
-            .skills ul li {
-                white-space: normal;
-                font-size: 0.6rem;
-                padding: 4px 10px;
-            }
+            letter-spacing: 0.3px;
+            transition: all 0.2s;
         }
 
         .skills ul li:hover {
-            background: rgba(0, 255, 200, 0.10);
+            background: rgba(0, 255, 200, 0.08);
             border-color: #00e5b0;
             color: #e0f5ff;
-            transform: scale(1.04);
-            box-shadow: 0 0 30px rgba(0, 255, 200, 0.06);
+            transform: scale(1.02);
         }
 
-        /* ---------- FOOTER (فقط کپی‌رایت) ---------- */
+        /* ---------- FOOTER ---------- */
         footer {
             margin-top: clamp(1.5rem, 4vh, 2.5rem);
             text-align: center;
-            font-size: clamp(0.6rem, 1.4vw, 0.75rem);
+            font-size: clamp(0.6rem, 1.4vw, 0.7rem);
             color: #405570;
             letter-spacing: 1px;
             position: relative;
             z-index: 2;
             border-top: 1px solid rgba(0, 255, 200, 0.04);
-            padding-top: clamp(1rem, 2.5vh, 1.6rem);
+            padding-top: clamp(1rem, 2.5vh, 1.4rem);
             width: 100%;
-            max-width: 540px;
+            max-width: 480px;
         }
 
         footer p {
             margin: 0;
         }
 
-        /* ---------- RESPONSIVE BREAKPOINTS ---------- */
+        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
-            body {
-                padding: 0.75rem;
-            }
             .card-container {
                 padding: 1.8rem 1.2rem 1.5rem;
                 border-radius: 32px;
-                margin: 10px 0;
             }
             .info-label {
-                top: 14px;
-                left: 14px;
-                padding: 4px 12px;
+                top: 12px;
+                left: 12px;
+                padding: 3px 10px;
                 font-size: 0.5rem;
-                letter-spacing: 1.2px;
             }
             .network-stats {
-                gap: 8px;
-            }
-            .network-stats .stat-item {
-                min-width: 40px;
-            }
-            .title {
-                padding: 6px 14px;
-                font-size: 0.7rem;
+                gap: 10px;
             }
         }
 
         @media (max-width: 380px) {
             .card-container {
                 padding: 1.4rem 0.8rem 1.2rem;
-                border-radius: 24px;
-            }
-            .info-label {
-                top: 10px;
-                left: 10px;
-                padding: 3px 8px;
-                font-size: 0.45rem;
-                letter-spacing: 1px;
             }
             .social-icons a {
-                width: 36px;
-                height: 36px;
-                font-size: 0.85rem;
-            }
-            .network-stats .stat-item .label {
-                font-size: 0.35rem;
-            }
-            .network-stats .stat-item .value {
-                font-size: 0.55rem;
+                width: 38px;
+                height: 38px;
+                font-size: 0.9rem;
             }
         }
 
         @media (min-width: 768px) and (max-width: 1024px) {
-            /* تبلت‌ها */
             .card-container {
-                max-width: 480px;
-                padding: 2.4rem 2.2rem 2rem;
-            }
-            .round {
-                width: 130px;
-                height: 130px;
-            }
-            .social-icons a {
-                width: 48px;
-                height: 48px;
-                font-size: 1.2rem;
+                max-width: 460px;
             }
         }
 
-        @media (min-width: 1025px) {
-            /* دسکتاپ */
-            .card-container {
-                max-width: 540px;
-            }
-        }
-
-        /* ---------- ORIENTATION: landscape on phones ---------- */
         @media (max-height: 500px) and (orientation: landscape) {
             .card-container {
-                padding: 1.2rem 1.5rem 1rem;
-                border-radius: 28px;
-                max-width: 480px;
+                padding: 1rem 1.5rem 0.8rem;
+                max-width: 420px;
             }
             .round {
                 width: 70px;
@@ -625,52 +432,42 @@
                 gap: 8px;
             }
             .social-icons a {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
+                width: 34px;
+                height: 34px;
+                font-size: 0.8rem;
             }
             .skills {
                 margin-top: 10px;
-                padding: 10px 12px 8px;
+                padding: 10px 10px 8px;
             }
             .skills ul {
                 gap: 4px 8px;
             }
             .skills ul li {
                 padding: 3px 10px;
-                font-size: 0.55rem;
+                font-size: 0.5rem;
             }
             .network-stats {
-                gap: 6px;
-                margin: 4px 0;
-            }
-            .signal-bars {
-                height: 16px;
-                padding: 3px 10px;
-                margin: 4px 0;
-            }
-            .traffic-equalizer {
-                height: 16px;
+                gap: 8px;
                 margin: 4px 0;
             }
             .info-label {
-                top: 10px;
-                left: 12px;
-                padding: 3px 10px;
-                font-size: 0.45rem;
+                top: 8px;
+                left: 10px;
+                padding: 2px 8px;
+                font-size: 0.4rem;
             }
             footer {
-                margin-top: 1rem;
-                padding-top: 0.8rem;
+                margin-top: 0.8rem;
+                padding-top: 0.6rem;
             }
             .location-sub {
                 margin: 2px 0 6px;
-                font-size: 0.65rem;
+                font-size: 0.6rem;
             }
             .title {
                 padding: 4px 12px;
-                font-size: 0.65rem;
-                margin: 4px 0 0;
+                font-size: 0.6rem;
             }
         }
     </style>
@@ -693,20 +490,17 @@
             <!-- Avatar -->
             <div class="avatar-wrapper">
                 <div class="radar-ring"></div>
-                <div class="ping-ring"></div>
-                <div class="ping-ring"></div>
-                <div class="ping-ring"></div>
                 <img class="round" src="https://i.postimg.cc/zf25NbRV/Picsart-25-10-16-20-46-18-568.jpg" alt="Mohammadreza Hedayati" />
             </div>
 
-            <h3>Mohammadreza</h3>
+            <h3>Mohammadreza Hedayati</h3>
 
-            <!-- Title: ICT & Networks -->
+            <!-- Title -->
             <div class="title">
                 <i class="fas fa-server"></i> <strong>ICT</strong> &amp; <strong>Networks</strong> <i class="fas fa-wifi"></i>
             </div>
 
-            <!-- Location: زیر عنوان -->
+            <!-- Location -->
             <div class="location-sub">
                 <i class="fas fa-map-pin"></i> Tehran, Iran
                 <img class="flag" src="https://flagcdn.com/w20/ir.png" srcset="https://flagcdn.com/w40/ir.png 2x" alt="Iran flag">
@@ -728,51 +522,17 @@
                 </a>
             </div>
 
-            <!-- Network Stats -->
+            <!-- Network Stats (فشرده) -->
             <div class="network-stats">
-                <div class="stat-item">
-                    <span class="label"><i class="fas fa-clock"></i> Uptime</span>
-                    <span class="value">42d</span>
-                </div>
-                <div class="stat-item">
-                    <span class="label"><i class="fas fa-bolt"></i> Ping</span>
-                    <span class="value">12ms</span>
-                </div>
-                <div class="stat-item">
-                    <span class="label"><i class="fas fa-chart-line"></i> Loss</span>
-                    <span class="value">0.0%</span>
-                </div>
-                <div class="stat-item">
-                    <span class="label"><i class="fas fa-wifi"></i> Signal</span>
-                    <span class="value">-52dBm</span>
-                </div>
-            </div>
-
-            <!-- Cisco-style Animated Signal Bars -->
-            <div class="signal-bars">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-
-            <!-- Traffic Equalizer -->
-            <div class="traffic-equalizer">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+                <span class="stat-item"><i class="fas fa-clock"></i> <span class="value">42d</span> uptime</span>
+                <span class="stat-item"><i class="fas fa-bolt"></i> <span class="value">12ms</span> ping</span>
+                <span class="stat-item"><i class="fas fa-chart-line"></i> <span class="value">0.0%</span> loss</span>
+                <span class="stat-item"><i class="fas fa-wifi"></i> <span class="value">-52dBm</span> signal</span>
             </div>
 
             <!-- Skills -->
             <div class="skills">
-                <h6>
-                    <i class="fas fa-microchip"></i> core interests
-                    <i class="fas fa-code"></i>
-                </h6>
+                <h6><i class="fas fa-microchip" style="margin-right:6px;"></i> core interests</h6>
                 <ul>
                     <li>Computer Networking</li>
                     <li>MikroTik RouterOS</li>
@@ -804,8 +564,8 @@
         let packets = [];
         let animationId = null;
 
-        const NODE_COUNT = 28;
-        const EDGE_DIST = 160;
+        const NODE_COUNT = 26;
+        const EDGE_DIST = 150;
 
         function resize() {
             width = window.innerWidth;
@@ -821,13 +581,13 @@
                 nodes.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    radius: 2 + Math.random() * 3
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: 2 + Math.random() * 2.5
                 });
             }
             packets = [];
-            for (let i = 0; i < 12; i++) {
+            for (let i = 0; i < 10; i++) {
                 spawnPacket(true);
             }
         }
@@ -852,8 +612,8 @@
                 from: fromIdx,
                 to: toIdx,
                 progress: Math.random(),
-                speed: 0.005 + Math.random() * 0.015,
-                radius: 2 + Math.random() * 3
+                speed: 0.005 + Math.random() * 0.012,
+                radius: 2 + Math.random() * 2
             });
         }
 
@@ -878,12 +638,12 @@
                     const dy = nodes[i].y - nodes[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < EDGE_DIST) {
-                        const alpha = 0.15 * (1 - dist / EDGE_DIST);
+                        const alpha = 0.12 * (1 - dist / EDGE_DIST);
                         ctx.beginPath();
                         ctx.moveTo(nodes[i].x, nodes[i].y);
                         ctx.lineTo(nodes[j].x, nodes[j].y);
                         ctx.strokeStyle = `rgba(0, 229, 176, ${alpha})`;
-                        ctx.lineWidth = 0.8;
+                        ctx.lineWidth = 0.6;
                         ctx.stroke();
                     }
                 }
@@ -895,7 +655,7 @@
                 ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
                 ctx.fillStyle = '#00e5b0';
                 ctx.shadowColor = '#00e5b0';
-                ctx.shadowBlur = 12;
+                ctx.shadowBlur = 8;
                 ctx.fill();
                 ctx.shadowBlur = 0;
             }
@@ -919,12 +679,12 @@
                 const x = fromNode.x + (toNode.x - fromNode.x) * pkt.progress;
                 const y = fromNode.y + (toNode.y - fromNode.y) * pkt.progress;
 
-                const gradient = ctx.createRadialGradient(x, y, 0, x, y, 12);
-                gradient.addColorStop(0, 'rgba(0, 255, 200, 0.9)');
-                gradient.addColorStop(0.3, 'rgba(0, 229, 176, 0.4)');
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, 10);
+                gradient.addColorStop(0, 'rgba(0, 255, 200, 0.8)');
+                gradient.addColorStop(0.3, 'rgba(0, 229, 176, 0.3)');
                 gradient.addColorStop(1, 'rgba(0, 229, 176, 0)');
                 ctx.beginPath();
-                ctx.arc(x, y, 12, 0, Math.PI * 2);
+                ctx.arc(x, y, 10, 0, Math.PI * 2);
                 ctx.fillStyle = gradient;
                 ctx.fill();
 
@@ -932,7 +692,7 @@
                 ctx.arc(x, y, pkt.radius, 0, Math.PI * 2);
                 ctx.fillStyle = '#ffffff';
                 ctx.shadowColor = '#00e5b0';
-                ctx.shadowBlur = 25;
+                ctx.shadowBlur = 20;
                 ctx.fill();
                 ctx.shadowBlur = 0;
 
@@ -940,7 +700,7 @@
             }
             packets = newPackets;
 
-            while (packets.length < 10) {
+            while (packets.length < 8) {
                 spawnPacket(true);
             }
         }
@@ -957,7 +717,7 @@
         function createBinaryStreams() {
             const container = document.body;
             const chars = '01';
-            for (let i = 0; i < 18; i++) {
+            for (let i = 0; i < 14; i++) {
                 const span = document.createElement('span');
                 span.className = 'binary-stream';
                 let text = '';
@@ -966,10 +726,10 @@
                 }
                 span.textContent = text;
                 span.style.left = Math.random() * 100 + '%';
-                span.style.fontSize = (10 + Math.random() * 18) + 'px';
+                span.style.fontSize = (10 + Math.random() * 16) + 'px';
                 span.style.animationDuration = (15 + Math.random() * 25) + 's';
                 span.style.animationDelay = (Math.random() * 15) + 's';
-                span.style.opacity = 0.05 + Math.random() * 0.08;
+                span.style.opacity = 0.04 + Math.random() * 0.06;
                 container.appendChild(span);
             }
         }
@@ -983,8 +743,8 @@
         createBinaryStreams();
 
         canvas.addEventListener('click', () => {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => spawnPacket(true), i * 50);
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => spawnPacket(true), i * 60);
             }
         });
     </script>
