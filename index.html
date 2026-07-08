@@ -1,194 +1,821 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="ltr">
 <head>
-	<meta charset="UTF-8">
-	<title>about Mohammadreza502</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Personal page of Mohammadreza Hedayati - ICT and Computer Networks.">
-	<meta name="keywords" content="Mohammadreza, Hedayati, ICT, Networks, MikroTik, Wi-Fi, Linux, Iran">
-	<meta name="author" content="Mohammadreza Hedayati">
-	<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/471/471664.png" type="image/png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-	<style>
-		@import url('https://fonts.googleapis.com/css?family=Montserrat');
-		* { box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <title>Mohammadreza Hedayati · Network Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal page of Mohammadreza Hedayati - ICT & Computer Networks.">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/471/471664.png" type="image/png">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-		html, body {
-			height: 100%;
-			margin: 0;
-		}
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            background: #08070f;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-		body {
-			display: flex;
-			flex-direction: column;
-			background: linear-gradient(-45deg, #28223F, #3B2F5B, #1F1A36, #2E295E);
-			background-size: 400% 400%;
-			animation: gradientBG 15s ease infinite;
-			font-family: Montserrat, sans-serif;
-		}
+        /* ---------- CANVAS (Network Topology) ---------- */
+        #network-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
 
-		main {
-			flex: 1;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			flex-direction: column;
-		}
+        /* ---------- FLOATING BINARY STREAM ---------- */
+        .binary-stream {
+            position: fixed;
+            font-family: 'Orbitron', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: rgba(0, 255, 200, 0.08);
+            pointer-events: none;
+            z-index: 0;
+            animation: fall linear infinite;
+            white-space: nowrap;
+        }
 
-		@keyframes gradientBG {
-			0%   { background-position: 0% 50%; }
-			50%  { background-position: 100% 50%; }
-			100% { background-position: 0% 50%; }
-		}
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
 
-		h3 { margin: 10px 0; }
-		h6 { margin: 5px 0; text-transform: uppercase; }
-		p { font-size: 14px; line-height: 21px; }
+        /* ---------- MAIN CARD ---------- */
+        .card-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(12, 14, 30, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 48px;
+            padding: 2.8rem 2.8rem 2.2rem;
+            max-width: 540px;
+            width: 100%;
+            box-shadow:
+                0 30px 80px -15px rgba(0, 0, 0, 0.9),
+                inset 0 1px 1px rgba(255, 255, 255, 0.06),
+                0 0 0 1px rgba(0, 255, 200, 0.12);
+            border: 1px solid rgba(0, 255, 200, 0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+            margin: 20px 0;
+        }
 
-		.card-container {
-			background-color: #231E39;
-			border-radius: 5px;
-			box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
-			color: #B3B8CD;
-			padding-top: 30px;
-			position: relative;
-			width: 350px;
-			max-width: 100%;
-			text-align: center;
-		}
+        .card-container::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50px;
+            background: conic-gradient(from 0deg,
+                    transparent,
+                    rgba(0, 255, 200, 0.15),
+                    rgba(0, 150, 255, 0.2),
+                    rgba(200, 0, 255, 0.10),
+                    transparent,
+                    rgba(0, 255, 200, 0.15),
+                    transparent);
+            z-index: -1;
+            animation: spinGlow 8s linear infinite;
+            opacity: 0.6;
+            filter: blur(10px);
+        }
 
-		.card-container .info-label {
-			color: #231E39;
-			background-color: #FEBB0B;
-			border-radius: 3px;
-			font-size: 14px;
-			font-weight: bold;
-			padding: 3px 7px;
-			position: absolute;
-			top: 30px;
-			left: 13px;
-		}
+        .card-container::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 48px;
+            background: linear-gradient(135deg, rgba(0, 255, 200, 0.08), rgba(0, 150, 255, 0.04), rgba(200, 0, 255, 0.06));
+            z-index: -1;
+            filter: blur(6px);
+            opacity: 0.6;
+        }
 
-		.card-container .round {
-			border: 1px solid #03BFCB;
-			border-radius: 50%;
-			padding: 7px;
-		}
+        @keyframes spinGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-		.social-icons {
-			margin-top: 20px;
-		}
+        /* ---------- BADGE ---------- */
+        .info-label {
+            position: absolute;
+            top: 20px;
+            left: 24px;
+            background: linear-gradient(135deg, #00e5b0, #00b8d4);
+            color: #08070f;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 40px;
+            box-shadow: 0 0 25px rgba(0, 230, 180, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-		.social-icons a {
-			display: inline-block;
-			width: 35px;
-			height: 35px;
-			margin: 0 5px;
-			background-color: #03BFCB;
-			color: #231E39;
-			border-radius: 50%;
-			text-align: center;
-			line-height: 35px;
-			font-size: 16px;
-			transition: background-color 0.3s, color 0.3s;
-		}
+        /* ---------- AVATAR + RADAR ---------- */
+        .avatar-wrapper {
+            margin-top: 12px;
+            position: relative;
+            display: inline-block;
+        }
 
-		.social-icons a:hover {
-			background-color: #02899C;
-			color: white;
-		}
+        .avatar-wrapper .radar-ring {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 30%, rgba(0, 255, 200, 0.03) 70%, transparent 100%);
+            z-index: 0;
+            overflow: hidden;
+        }
 
-		.skills {
-			background-color: #1F1A36;
-			text-align: left;
-			padding: 15px;
-			margin-top: 30px;
-		}
+        .avatar-wrapper .radar-ring::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 50%;
+            background: conic-gradient(from 0deg, transparent, rgba(0, 255, 200, 0.25), transparent);
+            transform-origin: center center;
+            animation: radarSweep 3s linear infinite;
+            border-radius: 50% 50% 0 0;
+            transform: translate(-50%, -50%) rotate(0deg);
+        }
 
-		.skills ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
+        @keyframes radarSweep {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
 
-		.skills ul li {
-			border: 1px solid #2D2747;
-			border-radius: 2px;
-			display: inline-block;
-			font-size: 12px;
-			margin: 0 7px 7px 0;
-			padding: 7px;
-		}
+        .avatar-wrapper .ping-ring {
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 255, 200, 0.3);
+            animation: pingExpand 2.5s ease-out infinite;
+            z-index: 0;
+        }
 
-		footer {
-			background-color: #222;
-			color: #fff;
-			font-size: 14px;
-			text-align: center;
-			width: 100%;
-			position: fixed;
-			bottom: 0;
-			left: 0;
-		}
+        .avatar-wrapper .ping-ring:nth-child(2) {
+            animation-delay: 0.8s;
+        }
+        .avatar-wrapper .ping-ring:nth-child(3) {
+            animation-delay: 1.6s;
+        }
 
-		footer p {
-			margin: 10px 0;
-		}
+        @keyframes pingExpand {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
 
-		footer i {
-			color: red;
-		}
+        .round {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 200, 0.5);
+            padding: 5px;
+            background: #0d0c1a;
+            box-shadow: 0 0 40px rgba(0, 255, 200, 0.15), inset 0 0 30px rgba(0, 255, 200, 0.05);
+            transition: 0.4s;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+        }
 
-		footer a {
-			color: #3c97bf;
-			text-decoration: none;
-		}
+        .round:hover {
+            transform: scale(1.03);
+            border-color: #00e5b0;
+            box-shadow: 0 0 60px rgba(0, 255, 200, 0.3);
+        }
 
-		.flag {
-			width: 16px;
-			height: auto;
-			vertical-align: middle;
-			margin: 0 4px;
-		}
-	</style>
+        /* ---------- NAME ---------- */
+        h3 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin: 22px 0 6px;
+            background: linear-gradient(to right, #f0f9ff, #80d0ff, #b0e0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 40px rgba(0, 150, 255, 0.15);
+        }
+
+        /* ---------- LOCATION ---------- */
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 255, 200, 0.05);
+            padding: 6px 20px 6px 16px;
+            border-radius: 40px;
+            border: 1px solid rgba(0, 255, 200, 0.10);
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #90b0d0;
+            margin-bottom: 14px;
+            backdrop-filter: blur(4px);
+        }
+
+        .location i {
+            color: #00e5b0;
+        }
+
+        .flag {
+            width: 24px;
+            height: auto;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ---------- TITLE ---------- */
+        .title {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            color: #80a0c0;
+            margin: 6px 0 0;
+            padding: 8px 24px;
+            display: inline-block;
+            border-top: 1px solid rgba(0, 255, 200, 0.12);
+            border-bottom: 1px solid rgba(0, 255, 200, 0.12);
+            border-radius: 40px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .title strong {
+            color: #b8e0ff;
+            font-weight: 600;
+        }
+
+        .title i {
+            color: #00e5b0;
+            margin: 0 6px;
+        }
+
+        /* ---------- SOCIAL ICONS ---------- */
+        .social-icons {
+            margin: 26px 0 14px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            background: rgba(0, 255, 200, 0.04);
+            border-radius: 50%;
+            color: #b0c8e0;
+            font-size: 1.3rem;
+            border: 1px solid rgba(0, 255, 200, 0.10);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(4px);
+            position: relative;
+        }
+
+        .social-icons a::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 200, 0.15), transparent 70%);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: rgba(0, 255, 200, 0.12);
+            color: #00e5b0;
+            border-color: #00e5b0;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 255, 200, 0.15);
+        }
+
+        .social-icons a:hover::after {
+            opacity: 1;
+        }
+
+        /* ---------- NETWORK STATS (مرتبط با شبکه) ---------- */
+        .network-stats {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin: 14px 0 6px;
+            font-size: 0.7rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #406070;
+            letter-spacing: 0.5px;
+        }
+
+        .network-stats span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .network-stats i {
+            color: #00e5b0;
+            font-size: 0.75rem;
+        }
+
+        .network-stats .value {
+            color: #80c8d8;
+            font-weight: 600;
+        }
+
+        /* ---------- TRAFFIC EQUALIZER ---------- */
+        .traffic-equalizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 6px;
+            height: 30px;
+            margin: 12px 0 4px;
+        }
+
+        .traffic-equalizer .bar {
+            width: 6px;
+            background: linear-gradient(to top, #00e5b0, #0088ff);
+            border-radius: 4px;
+            animation: trafficPulse 1.2s ease-in-out infinite alternate;
+            box-shadow: 0 0 10px rgba(0, 229, 176, 0.2);
+        }
+
+        .traffic-equalizer .bar:nth-child(1) { height: 30%; animation-delay: 0.0s; }
+        .traffic-equalizer .bar:nth-child(2) { height: 60%; animation-delay: 0.2s; }
+        .traffic-equalizer .bar:nth-child(3) { height: 90%; animation-delay: 0.4s; }
+        .traffic-equalizer .bar:nth-child(4) { height: 45%; animation-delay: 0.6s; }
+        .traffic-equalizer .bar:nth-child(5) { height: 75%; animation-delay: 0.8s; }
+        .traffic-equalizer .bar:nth-child(6) { height: 100%; animation-delay: 1.0s; }
+
+        @keyframes trafficPulse {
+            0% { transform: scaleY(0.4); opacity: 0.4; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* ---------- SKILLS ---------- */
+        .skills {
+            margin-top: 20px;
+            padding: 20px 16px 14px;
+            background: rgba(0, 0, 0, 0.30);
+            border-radius: 28px;
+            border: 1px solid rgba(0, 255, 200, 0.06);
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .skills h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #50b8c8;
+            margin-bottom: 16px;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .skills h6 i {
+            color: #00e5b0;
+        }
+
+        .skills ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 14px;
+            padding: 0;
+        }
+
+        .skills ul li {
+            background: rgba(0, 200, 180, 0.06);
+            border: 1px solid rgba(0, 255, 200, 0.08);
+            border-radius: 40px;
+            padding: 8px 22px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #b0d0e8;
+            letter-spacing: 0.4px;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(2px);
+        }
+
+        .skills ul li:hover {
+            background: rgba(0, 255, 200, 0.10);
+            border-color: #00e5b0;
+            color: #e0f5ff;
+            transform: scale(1.04);
+            box-shadow: 0 0 30px rgba(0, 255, 200, 0.06);
+        }
+
+        /* ---------- FOOTER (فقط کپی‌رایت) ---------- */
+        footer {
+            margin-top: 2.8rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #405570;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(0, 255, 200, 0.04);
+            padding-top: 1.8rem;
+            width: 100%;
+            max-width: 540px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 540px) {
+            .card-container {
+                padding: 2rem 1.5rem 1.8rem;
+                border-radius: 32px;
+            }
+            h3 {
+                font-size: 1.6rem;
+            }
+            .round {
+                width: 110px;
+                height: 110px;
+            }
+            .info-label {
+                font-size: 0.55rem;
+                padding: 4px 12px;
+                top: 14px;
+                left: 16px;
+            }
+            .social-icons a {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+            .skills ul li {
+                font-size: 0.7rem;
+                padding: 6px 14px;
+            }
+            .network-stats {
+                gap: 16px;
+                font-size: 0.6rem;
+                flex-wrap: wrap;
+            }
+            .title {
+                font-size: 0.85rem;
+                padding: 6px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card-container {
+                padding: 1.6rem 1rem 1.4rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            .round {
+                width: 90px;
+                height: 90px;
+            }
+            .info-label {
+                font-size: 0.5rem;
+                padding: 3px 10px;
+                top: 10px;
+                left: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-<main>
-	<div class="card-container">
-		<span class="info-label">Information</span>
-		<img class="round" src="https://i.postimg.cc/zf25NbRV/Picsart-25-10-16-20-46-18-568.jpg" alt="user" />
-		<h3>Mohammadreza Hedayati</h3>
-		<h6>
-			📍 Tehran, Iran
-			<img class="flag" src="https://flagcdn.com/w20/ir.png" srcset="https://flagcdn.com/w40/ir.png 2x" alt="🇮🇷">
-		</h6>
-		<p>ICT and <br/> Computer Networks</p>
-		<div class="social-icons">
-			<a href="https://instagram.com/mohammadreza.502" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-			<a href="https://x.com/Mohammadreza502" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x"></i></a>
-			<a href="tel:=989999928691"><i class="fas fa-phone"></i></a>
-			<a href="https://linkedin.com/in/mohammadreza502" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
-		</div>
-		<div class="skills">
-			<h6>❤️Interested in</h6>
-			<ul>
-				<li>Computer Networking</li>
-				<li>MikroTik RouterOS</li>
-				<li>Wi-Fi Planning and Troubleshooting</li>
-				<li>Wireless Networking (Wi-Fi, LTE, etc.)</li>
-				<li>Linux systems</li>			
-				<li>IDS/IPS</li>
-				<li>Python</li>
-			</ul>
-		</div>
-	</div>
-</main>
-<footer>
-	<p>&copy; Mohammadreza502</p>
-</footer>
+
+    <!-- ====== CANVAS ====== -->
+    <canvas id="network-canvas"></canvas>
+
+    <!-- ====== BINARY STREAMS (JS) ====== -->
+
+    <!-- ====== MAIN CARD ====== -->
+    <main style="width:100%; display:flex; justify-content:center; align-items:center; flex:1; position:relative; z-index:1;">
+        <div class="card-container">
+
+            <span class="info-label">
+                <i class="fas fa-network-wired"></i> ICT Engineer
+            </span>
+
+            <!-- Avatar -->
+            <div class="avatar-wrapper">
+                <div class="radar-ring"></div>
+                <div class="ping-ring"></div>
+                <div class="ping-ring"></div>
+                <div class="ping-ring"></div>
+                <img class="round" src="https://i.postimg.cc/zf25NbRV/Picsart-25-10-16-20-46-18-568.jpg" alt="Mohammadreza Hedayati" />
+            </div>
+
+            <h3>Mohammadreza</h3>
+
+            <div class="location">
+                <i class="fas fa-map-pin"></i> Tehran, Iran
+                <img class="flag" src="https://flagcdn.com/w20/ir.png" srcset="https://flagcdn.com/w40/ir.png 2x" alt="Iran flag">
+            </div>
+
+            <div class="title">
+                <i class="fas fa-server"></i> <strong>ICT</strong> &amp; <strong>Networks</strong> <i class="fas fa-wifi"></i>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="https://instagram.com/mohammadreza.502" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://x.com/Mohammadreza502" target="_blank" rel="noopener noreferrer" aria-label="X">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="tel:+989999928691" aria-label="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="https://linkedin.com/in/mohammadreza502" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+
+            <!-- Network Stats (مرتبط با شبکه) -->
+            <div class="network-stats">
+                <span><i class="fas fa-clock"></i> <span class="value">Uptime</span> 42d</span>
+                <span><i class="fas fa-bolt"></i> <span class="value">Ping</span> 12ms</span>
+                <span><i class="fas fa-chart-line"></i> <span class="value">Loss</span> 0.0%</span>
+                <span><i class="fas fa-wifi"></i> <span class="value">Signal</span> -52dBm</span>
+            </div>
+
+            <!-- Traffic Equalizer -->
+            <div class="traffic-equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+
+            <!-- Skills -->
+            <div class="skills">
+                <h6>
+                    <i class="fas fa-microchip"></i> core interests
+                    <i class="fas fa-code"></i>
+                </h6>
+                <ul>
+                    <li>Computer Networking</li>
+                    <li>MikroTik RouterOS</li>
+                    <li>Wi‑Fi Planning</li>
+                    <li>Wireless (Wi‑Fi/LTE)</li>
+                    <li>Linux Systems</li>
+                    <li>IDS/IPS</li>
+                    <li>Python</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ====== FOOTER (فقط کپی‌رایت) ====== -->
+    <footer>
+        <p>© 2026 · Mohammadreza Hedayati</p>
+    </footer>
+
+    <script>
+        // ============================================================
+        //  NETWORK TOPOLOGY (Canvas)
+        // ============================================================
+        const canvas = document.getElementById('network-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let nodes = [];
+        let packets = [];
+        let animationId = null;
+
+        const NODE_COUNT = 28;
+        const EDGE_DIST = 160;
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initNodes();
+        }
+
+        function initNodes() {
+            nodes = [];
+            for (let i = 0; i < NODE_COUNT; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: 2 + Math.random() * 3
+                });
+            }
+            packets = [];
+            for (let i = 0; i < 12; i++) {
+                spawnPacket(true);
+            }
+        }
+
+        function spawnPacket(random = true) {
+            if (nodes.length < 2) return;
+            let fromIdx, toIdx;
+            if (random) {
+                fromIdx = Math.floor(Math.random() * nodes.length);
+                toIdx = Math.floor(Math.random() * nodes.length);
+                while (toIdx === fromIdx) {
+                    toIdx = Math.floor(Math.random() * nodes.length);
+                }
+            } else {
+                fromIdx = Math.floor(Math.random() * nodes.length);
+                toIdx = Math.floor(Math.random() * nodes.length);
+                while (toIdx === fromIdx) {
+                    toIdx = Math.floor(Math.random() * nodes.length);
+                }
+            }
+            packets.push({
+                from: fromIdx,
+                to: toIdx,
+                progress: Math.random(),
+                speed: 0.005 + Math.random() * 0.015,
+                radius: 2 + Math.random() * 3
+            });
+        }
+
+        function updateNodes() {
+            for (let node of nodes) {
+                node.x += node.vx;
+                node.y += node.vy;
+                if (node.x < 0 || node.x > width) node.vx *= -1;
+                if (node.y < 0 || node.y > height) node.vy *= -1;
+                node.x = Math.max(0, Math.min(width, node.x));
+                node.y = Math.max(0, Math.min(height, node.y));
+            }
+        }
+
+        function drawNetwork() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Edges
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < EDGE_DIST) {
+                        const alpha = 0.15 * (1 - dist / EDGE_DIST);
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(0, 229, 176, ${alpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            // Nodes
+            for (let node of nodes) {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00e5b0';
+                ctx.shadowColor = '#00e5b0';
+                ctx.shadowBlur = 12;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+
+            // Packets
+            const newPackets = [];
+            for (let pkt of packets) {
+                const fromNode = nodes[pkt.from];
+                const toNode = nodes[pkt.to];
+                if (!fromNode || !toNode) {
+                    spawnPacket(true);
+                    continue;
+                }
+
+                pkt.progress += pkt.speed;
+                if (pkt.progress >= 1) {
+                    spawnPacket(true);
+                    continue;
+                }
+
+                const x = fromNode.x + (toNode.x - fromNode.x) * pkt.progress;
+                const y = fromNode.y + (toNode.y - fromNode.y) * pkt.progress;
+
+                const gradient = ctx.createRadialGradient(x, y, 0, x, y, 12);
+                gradient.addColorStop(0, 'rgba(0, 255, 200, 0.9)');
+                gradient.addColorStop(0.3, 'rgba(0, 229, 176, 0.4)');
+                gradient.addColorStop(1, 'rgba(0, 229, 176, 0)');
+                ctx.beginPath();
+                ctx.arc(x, y, 12, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(x, y, pkt.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffffff';
+                ctx.shadowColor = '#00e5b0';
+                ctx.shadowBlur = 25;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+
+                newPackets.push(pkt);
+            }
+            packets = newPackets;
+
+            while (packets.length < 10) {
+                spawnPacket(true);
+            }
+        }
+
+        function animateNetwork() {
+            updateNodes();
+            drawNetwork();
+            animationId = requestAnimationFrame(animateNetwork);
+        }
+
+        // ============================================================
+        //  BINARY STREAMS
+        // ============================================================
+        function createBinaryStreams() {
+            const container = document.body;
+            const chars = '01';
+            for (let i = 0; i < 18; i++) {
+                const span = document.createElement('span');
+                span.className = 'binary-stream';
+                let text = '';
+                for (let j = 0; j < 6 + Math.floor(Math.random() * 8); j++) {
+                    text += chars[Math.floor(Math.random() * chars.length)];
+                }
+                span.textContent = text;
+                span.style.left = Math.random() * 100 + '%';
+                span.style.fontSize = (10 + Math.random() * 18) + 'px';
+                span.style.animationDuration = (15 + Math.random() * 25) + 's';
+                span.style.animationDelay = (Math.random() * 15) + 's';
+                span.style.opacity = 0.05 + Math.random() * 0.08;
+                container.appendChild(span);
+            }
+        }
+
+        // ============================================================
+        //  INIT
+        // ============================================================
+        window.addEventListener('resize', resize);
+        resize();
+        animateNetwork();
+        createBinaryStreams();
+
+        canvas.addEventListener('click', () => {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => spawnPacket(true), i * 50);
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
