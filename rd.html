@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سکه باران | نمایش لحظه‌ای قیمت طلا و ارز</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-dark: #0a192f;
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-gold: #d4af37;
+            --light-gold: #f5e8c8;
+            --white: #ffffff;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --card-bg: rgba(15, 23, 42, 0.7);
+        }
+        
+        body {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            direction: rtl;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header and Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--accent-gold);
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.4));
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--accent-gold), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--light-gold);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-gold);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 50px 0;
+            background: linear-gradient(rgba(10, 25, 47, 0.9), rgba(10, 25, 47, 0.95)), url('https://images.unsplash.com/photo-1581985673473-0784a7a44e39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0) 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--white), var(--light-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+        }
+        
+        .gold-price-card {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8) 0%, rgba(59, 130, 246, 0.6) 100%);
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gold-price-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 70%);
+            z-index: 0;
+        }
+        
+        .price-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price-card-header h3 {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .price-card-header h3 i {
+            font-size: 1.3rem;
+        }
+        
+        .update-time {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .price-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .price-item {
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .price-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+        
+        .price-title {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .price-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .price-change {
+            font-size: 0.9rem;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .price-change.positive {
+            color: var(--success);
+        }
+        
+        .price-change.negative {
+            color: var(--danger);
+        }
+        
+        .price-change.neutral {
+            color: var(--warning);
+        }
+        
+        /* Currency Section */
+        .currency-section, .gold-section, .coin-section {
+            padding: 30px 0;
+            background-color: rgba(15, 23, 42, 0.5);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            width: 70%;
+            height: 3px;
+            bottom: -8px;
+            right: 15%;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+        
+        .section-header p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+        
+        .price-table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            font-size: 0.85rem;
+        }
+        
+        .price-table th {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.8) 0%, rgba(59, 130, 246, 0.6) 100%);
+            color: var(--accent-gold);
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 1rem;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .price-table td {
+            padding: 10px 8px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .price-table tr:hover {
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+        
+        .currency-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: right;
+            padding-right: 10px;
+        }
+        
+        .currency-flag {
+            width: 30px;
+            height: 22px;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .buy-price, .sell-price {
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .chart-btn {
+            background-color: rgba(30, 58, 138, 0.3);
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0 auto;
+        }
+        
+        .chart-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        /* Chart Section */
+        .chart-section {
+            padding: 40px 0;
+            background-color: rgba(15, 23, 42, 0.7);
+        }
+        
+        .chart-container {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 20px;
+        }
+        
+        .chart-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .date-inputs {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .date-input {
+            background-color: rgba(30, 58, 138, 0.3);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--white);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .show-chart-btn {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+            color: var(--primary-dark);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: transform 0.3s;
+        }
+        
+        .show-chart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        
+        /* Note Section */
+        .note-section {
+            padding: 20px 0;
+            background-color: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .note-box {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        .note-box h3 {
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .note-box p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            padding: 30px 0 15px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-column h3 {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-gold);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+        
+        .contact-info {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .price-display {
+                flex-direction: column;
+            }
+            
+            .price-item {
+                width: 100%;
+            }
+            
+            .chart-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .date-inputs {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .gold-price-card {
+                padding: 15px;
+            }
+            
+            .price-card-header {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+            
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .price-table {
+                font-size: 0.75rem;
+            }
+            
+            .buy-price, .sell-price {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animation for prices */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #b8941f 0%, var(--accent-gold) 100%);
+        }
+    </style>
+</head>
+<body>
+       <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>طلا فروشی باران</h1>
+                        <span>نمایش لحظه‌ای قیمت طلا، سکه و ارز</span>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> صفحه اصلی</a></li>
+                        <li><a href="#currency"><i class="fas fa-dollar-sign"></i> نرخ ارز</a></li>
+                        <li><a href="#coins"><i class="fas fa-coins"></i> سکه بانکی</a></li>
+                        <li><a href="#chart"><i class="fas fa-chart-line"></i> نمودارها</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>قیمت لحظه‌ای طلا، سکه و ارز</h2>
+                <p>در طلا فروشی باران، آخرین و به‌روزترین قیمت‌های طلا، سکه، شمش و ارزهای معتبر جهانی را به صورت لحظه‌ای مشاهده کنید.</p>
+                
+                <div class="gold-price-card">
+                    <div class="price-card-header">
+                        <h3><i class="fas fa-chart-line"></i> قیمت طلا و ارز امروز - <span id="current-date"></span></h3>
+                        <div class="update-time">آخرین بروزرسانی: <span id="update-time">در حال دریافت...</span></div>
+                    </div>
+                    
+                    <div class="price-display">
+                        <div class="price-item">
+                            <div class="price-title">سکه تمام بهار</div>
+                            <div class="price-value" id="tamam-bahar-price">در حال دریافت...</div>
+                            <div class="price-change neutral"><i class="fas fa-sync-alt"></i> به روزرسانی</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                        
+                        <div class="price-item">
+                            <div class="price-title">سکه نیم بهار</div>
+                            <div class="price-value" id="nim-bahar-price">در حال دریافت...</div>
+                            <div class="price-change neutral"><i class="fas fa-sync-alt"></i> به روزرسانی</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                        
+                        <div class="price-item">
+                            <div class="price-title">سکه ربع بهار</div>
+                            <div class="price-value" id="rob-bahar-price">در حال دریافت...</div>
+                            <div class="price-change neutral"><i class="fas fa-sync-alt"></i> به روزرسانی</div>
+                            <div class="price-title">تومان</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coin Section -->
+    <section id="coins" class="coin-section">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-coins"></i> سکه‌های بانکی</h2>
+                <p>قیمت خرید و فروش سکه‌های بانکی - <span id="coin-update-time">در حال دریافت...</span></p>
+            </div>
+            
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th width="35%">عنوان</th>
+                            <th width="20%">خرید</th>
+                            <th width="20%">فروش</th>
+                            <th width="15%">تغییرات</th>
+                            <th width="10%">نمودار</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coin-table">
+                        <tr id="loading-row">
+                            <td colspan="5" style="text-align: center; padding: 30px; color: var(--accent-gold);">
+                                <i class="fas fa-spinner fa-spin"></i> در حال دریافت اطلاعات از سرور...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Note Section -->
+    <section class="note-section">
+        <div class="container">
+            <div class="note-box">
+                <h3><i class="fas fa-info-circle"></i> نکات مهم:</h3>
+                <p>قیمت‌های نمایش داده شده به صورت زنده و هر ۳۰ ثانیه یکبار به‌روزرسانی می‌شوند. تمامی قیمت‌ها به تومان بوده و از منابع معتبر دریافت می‌شوند.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>طلا فروشی باران</h3>
+                    <p style="color: #cbd5e1; line-height: 1.6; font-size: 0.9rem;">طلا فروشی باران با بیش از ۳۰ سال سابقه در زمینه خرید و فروش طلا، سکه، شمش و جواهرات، همواره با ارائه بهترین قیمت‌ها و کیفیت برتر در خدمت مشتریان محترم می‌باشد.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>دسترسی سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-left"></i> صفحه اصلی</a></li>
+                        <li><a href="#coins"><i class="fas fa-chevron-left"></i> سکه بانکی</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>اطلاعات تماس</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> تهران، خیابان جمهوری، پلاک ۱۲۳</p>
+                        <p><i class="fas fa-phone"></i> ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p><i class="fas fa-mobile-alt"></i> ۰۹۱۲-۱۲۳۴۵۶۷</p>
+                        <p><i class="fas fa-envelope"></i> info@baran-jewelry.com</p>
+                        <p><i class="fas fa-clock"></i> ساعت کاری: ۹ صبح تا ۹ شب</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© کلیه حقوق این وب‌سایت برای طلا فروشی باران محفوظ می‌باشد. ۱۴۰۴</p>
+                <p>تمامی قیمت‌ها به تومان می‌باشد و به صورت لحظه‌ای به‌روزرسانی می‌شوند.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============ API CONFIGURATION ============
+        const API_CONFIG = {
+            BASE_URL: 'http://baran.mrh502.ir:5000/api/prices',
+            UPDATE_INTERVAL: 30000 // هر ۳۰ ثانیه
+        };
+
+        // ============ UTILITY FUNCTIONS ============
+        function formatNumber(num) {
+            if (num === null || num === undefined || num === 0) return '۰';
+            return new Intl.NumberFormat('fa-IR').format(num);
+        }
+
+        function getCoinName(apiId) {
+            const names = {
+                'tamam-emami86': 'تمام امامی (۸۶)',
+                'tamam-bahar': 'تمام بهار آزادی',
+                'nim-bahar': 'نیم بهار آزادی',
+                'rob-bahar': 'ربع بهار آزادی',
+                'seke-1g': 'سکه یک گرمی',
+                'emami-ghabl86': 'امامی (قبل ۸۶)',
+                'nim-ghabl86': 'نیم (قبل ۸۶)',
+                'rob-ghabl86': 'ربع (قبل ۸۶)' // اصلاح شده: rob-ghabl886 -> rob-ghabl86
+            };
+            return names[apiId] || apiId;
+        }
+
+        function getCoinShortName(apiId) {
+            const names = {
+                'tamam-emami86': 'تمام امامی(۸۶)',
+                'tamam-bahar': 'تمام بهار',
+                'nim-bahar': 'نیم بهار',
+                'rob-bahar': 'ربع بهار',
+                'seke-1g': 'یک گرمی',
+                'emami-ghabl86': 'امامی(قبل ۸۶)',
+                'nim-ghabl86': 'نیم(قبل ۸۶)',
+                'rob-ghabl86': 'ربع(قبل ۸۶)' // اصلاح شده: rob-ghabl886 -> rob-ghabl86
+            };
+            return names[apiId] || apiId;
+        }
+
+        function calculateChange(buy, sell) {
+            if (!buy || buy === 0 || !sell) return 0;
+            return ((sell - buy) / buy) * 100;
+        }
+
+        function updateTimeDisplay() {
+            const now = new Date();
+            const dateOptions = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric'
+            };
+            const timeOptions = {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            };
+            
+            const persianDate = now.toLocaleDateString('fa-IR', dateOptions);
+            const persianTime = now.toLocaleTimeString('fa-IR', timeOptions);
+            
+            document.getElementById('current-date').textContent = persianDate;
+            document.getElementById('update-time').textContent = `${persianDate} - ${persianTime}`;
+            document.getElementById('coin-update-time').textContent = `${persianDate} - ${persianTime}`;
+        }
+
+        // ============ API FUNCTIONS ============
+        async function fetchCoinPrice(coinId) {
+            const url = `${API_CONFIG.BASE_URL}/${coinId}`;
+            
+            console.log(`📡 درخواست API: ${url}`);
+            
+            try {
+                const response = await fetch(url);
+                
+                if (!response.ok) {
+                    throw new Error(`خطای HTTP: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log(`✅ پاسخ ${coinId}:`, result);
+                
+                if (!result.success) {
+                    throw new Error('پاسخ API موفق نبود');
+                }
+                
+                return {
+                    id: coinId,
+                    name: result.data.title || getCoinName(coinId),
+                    buy: result.data.buy,
+                    sell: result.data.sell,
+                    timestamp: result.data.timestamp
+                };
+                
+            } catch (error) {
+                console.error(`❌ خطا در دریافت ${coinId}:`, error);
+                return {
+                    id: coinId,
+                    name: getCoinName(coinId),
+                    buy: 0,
+                    sell: 0,
+                    error: true,
+                    message: error.message
+                };
+            }
+        }
+
+        async function fetchAllCoins() {
+            console.log('🔄 شروع دریافت همه قیمت‌ها...');
+            
+            // لیست کامل APIها به ترتیب نمایش مورد نظر
+            const coinIds = [
+                'tamam-emami86',      // تمام امامی (86)
+                'tamam-bahar',        // تمام بهار آزادی
+                'nim-bahar',          // نیم بهار آزادی
+                'rob-bahar',          // ربع بهار آزادی
+                'seke-1g',           // سکه یک گرمی
+                'emami-ghabl86',      // امامی (قبل 86)
+                'nim-ghabl86',        // نیم (قبل 86)
+                'rob-ghabl86'         // ربع (قبل 86) - اصلاح شده
+            ];
+            
+            const promises = coinIds.map(coinId => fetchCoinPrice(coinId));
+            const results = await Promise.all(promises);
+            
+            console.log('📊 نتایج دریافت شد:', results);
+            return results;
+        }
+
+        // ============ UPDATE FUNCTIONS ============
+        function updateHeroPrices(coins) {
+            // سکه تمام بهار آزادی
+            const tamamBahar = coins.find(c => c.id === 'tamam-bahar');
+            if (tamamBahar && !tamamBahar.error) {
+                const element = document.getElementById('tamam-bahar-price');
+                if (element) {
+                    element.textContent = formatNumber(tamamBahar.buy);
+                    
+                    const change = calculateChange(tamamBahar.buy, tamamBahar.sell);
+                    const changeElement = element.nextElementSibling;
+                    if (changeElement) {
+                        const changeClass = change >= 0 ? 'positive' : 'negative';
+                        const changeIcon = change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                        changeElement.className = `price-change ${changeClass}`;
+                        changeElement.innerHTML = `<i class="fas ${changeIcon}"></i> ${Math.abs(change).toFixed(1)}٪`;
+                    }
+                }
+            }
+            
+            // سکه نیم بهار آزادی
+            const nimBahar = coins.find(c => c.id === 'nim-bahar');
+            if (nimBahar && !nimBahar.error) {
+                const element = document.getElementById('nim-bahar-price');
+                if (element) {
+                    element.textContent = formatNumber(nimBahar.buy);
+                    
+                    const change = calculateChange(nimBahar.buy, nimBahar.sell);
+                    const changeElement = element.nextElementSibling;
+                    if (changeElement) {
+                        const changeClass = change >= 0 ? 'positive' : 'negative';
+                        const changeIcon = change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                        changeElement.className = `price-change ${changeClass}`;
+                        changeElement.innerHTML = `<i class="fas ${changeIcon}"></i> ${Math.abs(change).toFixed(1)}٪`;
+                    }
+                }
+            }
+            
+            // سکه ربع بهار آزادی
+            const robBahar = coins.find(c => c.id === 'rob-bahar');
+            if (robBahar && !robBahar.error) {
+                const element = document.getElementById('rob-bahar-price');
+                if (element) {
+                    element.textContent = formatNumber(robBahar.buy);
+                    
+                    const change = calculateChange(robBahar.buy, robBahar.sell);
+                    const changeElement = element.nextElementSibling;
+                    if (changeElement) {
+                        const changeClass = change >= 0 ? 'positive' : 'negative';
+                        const changeIcon = change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                        changeElement.className = `price-change ${changeClass}`;
+                        changeElement.innerHTML = `<i class="fas ${changeIcon}"></i> ${Math.abs(change).toFixed(1)}٪`;
+                    }
+                }
+            }
+        }
+
+        function updateCoinTable(coins) {
+            const table = document.getElementById('coin-table');
+            if (!table) return;
+            
+            // پاک کردن ردیف لودینگ
+            const loadingRow = document.getElementById('loading-row');
+            if (loadingRow) {
+                loadingRow.remove();
+            }
+            
+            // پاک کردن ردیف‌های قبلی
+            const existingRows = table.querySelectorAll('tr[data-coin-id]');
+            existingRows.forEach(row => row.remove());
+            
+            // اضافه کردن ردیف‌های جدید به ترتیب (همان ترتیب آرایه)
+            coins.forEach(coin => {
+                const change = calculateChange(coin.buy, coin.sell);
+                const changeClass = change >= 0 ? 'positive' : 'negative';
+                const changeIcon = change >= 0 ? 'fa-arrow-up' : 'fa-arrow-down';
+                const changeText = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
+                
+                const row = document.createElement('tr');
+                row.setAttribute('data-coin-id', coin.id);
+                
+                if (coin.error) {
+                    row.innerHTML = `
+                        <td>${coin.name}</td>
+                        <td colspan="2" style="color: var(--danger); text-align: center;">
+                            <i class="fas fa-exclamation-triangle"></i> خطا در دریافت
+                        </td>
+                        <td>-</td>
+                        <td>
+                            <button class="chart-btn" disabled>
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </td>
+                    `;
+                } else {
+                    row.innerHTML = `
+                        <td style="text-align: right; padding-right: 15px;">${coin.name}</td>
+                        <td class="buy-price">${formatNumber(coin.buy)}</td>
+                        <td class="sell-price">${formatNumber(coin.sell)}</td>
+                        <td class="price-change ${changeClass}">
+                            <i class="fas ${changeIcon}"></i> ${changeText}
+                        </td>
+                        <td>
+                            <button class="chart-btn" data-coin="${coin.id}">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                        </td>
+                    `;
+                }
+                
+                table.appendChild(row);
+            });
+            
+            // اگر هیچ داده‌ای دریافت نشد
+            if (coins.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td colspan="5" style="text-align: center; padding: 30px; color: var(--danger);">
+                        <i class="fas fa-exclamation-circle"></i> خطا در اتصال به سرور
+                    </td>
+                `;
+                table.appendChild(row);
+            }
+        }
+
+        // ============ MAIN UPDATE FUNCTION ============
+        async function updateAllData() {
+            console.log('🔄 بروزرسانی داده‌ها...');
+            
+            try {
+                // بروزرسانی زمان
+                updateTimeDisplay();
+                
+                // دریافت داده‌ها از API
+                const coins = await fetchAllCoins();
+                
+                // به‌روزرسانی نمایش
+                updateHeroPrices(coins);
+                updateCoinTable(coins);
+                
+                // پالس انیمیشن
+                const goldCard = document.querySelector('.gold-price-card');
+                if (goldCard) {
+                    goldCard.classList.add('pulse');
+                    setTimeout(() => goldCard.classList.remove('pulse'), 2000);
+                }
+                
+                console.log('✅ داده‌ها با موفقیت بروزرسانی شدند');
+                
+            } catch (error) {
+                console.error('❌ خطا در بروزرسانی داده‌ها:', error);
+                
+                // نمایش خطا
+                const table = document.getElementById('coin-table');
+                if (table) {
+                    table.innerHTML = `
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 30px; color: var(--danger);">
+                                <i class="fas fa-exclamation-triangle"></i> خطا در اتصال به سرور API
+                                <br>
+                                <small>${error.message}</small>
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+        }
+
+        // ============ INITIALIZATION ============
+        function initializeApp() {
+            console.log('🚀 راه‌اندازی اپلیکیشن...');
+            
+            // بارگذاری اولیه
+            updateAllData();
+            
+            // راه‌اندازی بروزرسانی خودکار
+            const updateInterval = setInterval(() => {
+                updateAllData();
+            }, API_CONFIG.UPDATE_INTERVAL);
+            
+            // اضافه کردن دکمه بروزرسانی دستی
+            const refreshButton = document.createElement('button');
+            refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> بروزرسانی دستی';
+            refreshButton.style.cssText = `
+                background: linear-gradient(135deg, var(--accent-gold) 0%, #b8941f 100%);
+                color: var(--primary-dark);
+                border: none;
+                padding: 10px 20px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 700;
+                margin-top: 15px;
+                transition: transform 0.3s;
+                font-size: 0.9rem;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            `;
+            
+            refreshButton.addEventListener('click', updateAllData);
+            refreshButton.addEventListener('mouseenter', () => {
+                refreshButton.style.transform = 'translateY(-3px)';
+            });
+            refreshButton.addEventListener('mouseleave', () => {
+                refreshButton.style.transform = 'translateY(0)';
+            });
+            
+            // اضافه کردن دکمه به هیرو
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.appendChild(refreshButton);
+            }
+            
+            // تنظیم رویدادها برای دکمه‌های نمودار
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.chart-btn[data-coin]')) {
+                    const btn = e.target.closest('.chart-btn');
+                    const coinId = btn.getAttribute('data-coin');
+                    alert(`نمودار ${getCoinShortName(coinId)} نمایش داده خواهد شد.`);
+                }
+            });
+            
+            // پالس انیمیشن هر ۱۰ ثانیه
+            setInterval(() => {
+                const goldCard = document.querySelector('.gold-price-card');
+                if (goldCard) {
+                    goldCard.classList.add('pulse');
+                    setTimeout(() => goldCard.classList.remove('pulse'), 2000);
+                }
+            }, 10000);
+            
+            console.log('✅ اپلیکیشن با موفقیت راه‌اندازی شد');
+            
+            // بازگشت اینتروال برای cleanup
+            return updateInterval;
+        }
+
+        // ============ MAIN EXECUTION ============
+        let updateInterval;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📄 DOM آماده است');
+            updateInterval = initializeApp();
+        });
+
+        // ============ CLEANUP ============
+        window.addEventListener('beforeunload', () => {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                console.log('🧹 بروزرسانی خودکار متوقف شد');
+            }
+        });
+    </script>
+</body>
+</html>
